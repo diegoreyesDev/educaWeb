@@ -1,0 +1,103 @@
+@import url("variables.css");
+
+/* === CANVA MATEMÁTICO === */
+
+#canva-matematico {
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+#expression {
+  border-radius: var(--radio);
+  border: 2px solid var(--color-primario);
+  padding: 0.75rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+#analyzeBtn {
+  margin-top: 1rem;
+  background-color: var(--color-primario);
+  color: white;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: var(--radio);
+  font-weight: 600;
+}
+
+#output {
+  margin-top: 2rem;
+  text-align: left;
+  background-color: #f9f9f9;
+  border-radius: var(--radio);
+  padding: 1.5rem;
+  box-shadow: var(--sombra-base);
+}
+
+
+
+/* Estilos para el visualizador mejorado */
+.paso-analisis {
+    transition: all 0.3s ease;
+}
+
+.paso-analisis:hover {
+    transform: translateY(-2px);
+}
+
+.expresion-expandida, .expresion-simplificada {
+    font-family: 'Courier New', monospace;
+    font-size: 1.1rem;
+}
+
+.transicion-expresion {
+    border-left: 4px solid #007bff;
+}
+
+.operacion-destacada {
+    border-radius: 10px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
+/* Colores específicos para tipos de operación */
+.bg-operacion-parentesis { background: linear-gradient(135deg, #007bff, #0056b3); }
+.bg-operacion-raiz { background: linear-gradient(135deg, #28a745, #1e7e34); }
+.bg-operacion-potencia { background: linear-gradient(135deg, #dc3545, #c82333); }
+.bg-operacion-multiplicacion { background: linear-gradient(135deg, #17a2b8, #138496); }
+.bg-operacion-suma { background: linear-gradient(135deg, #6c757d, #545b62); }
+
+/* Barra de progreso */
+.progress {
+    height: 25px;
+    border-radius: 15px;
+}
+
+.progress-bar {
+    border-radius: 15px;
+    font-weight: bold;
+    transition: width 0.5s ease;
+}
+
+/* Resaltado de elementos */
+mark.bg-warning {
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+/* mensaje */
+.mensaje{
+    background-color: #007bff;
+    padding: 30px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    text-align: center;
+}

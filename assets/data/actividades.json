@@ -1,0 +1,656 @@
+[
+  {
+    "nivel": "1basico",
+    "asignatura": "lenguaje",
+    "titulo": "¡Abre y adivina!",
+    "descripcion": " ",
+    "url": "https://wordwall.net/es/resource/100137604",
+    "embedUrl": "https://wordwall.net/es/embed/fe79e91c07f14c2a9d1b511c7a182f7b?themeId=51&templateId=30&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/fe79e91c07f14c2a9d1b511c7a182f7b_51"
+  },
+  {
+    "nivel": "1basico",
+    "asignatura": "lenguaje",
+    "titulo": "Unimos y aprendemos",
+    "descripcion": " ",
+    "url": "https://wordwall.net/es/resource/99063654",
+    "embedUrl": "https://wordwall.net/es/embed/183008df159f41debf150506bee6fcac?themeId=66&templateId=3&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/183008df159f41debf150506bee6fcac_21"
+  }, 
+  {
+    "nivel": "1basico",
+    "asignatura": "lenguaje",
+    "titulo": "¿Qué va con qué",
+    "descripcion": " ",
+    "url": "https://wordwall.net/es/resource/100146994",
+    "embedUrl": "https://wordwall.net/es/embed/431143c848114133bd78a23f4254c8dc?themeId=55&templateId=25&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/431143c848114133bd78a23f4254c8dc_55"
+  }, 
+  {
+    "nivel": "1basico",
+    "asignatura": "matematicas",
+    "titulo": "Sumas, descubriendo las verdaderas y las falsas",
+    "descripcion": "Los estudiantes observan sumas y deciden cuál resultado es V o F. Esto permite reforzar el cálculo mental, la atención y la comprensión del valor numérico.",
+    "url": "https://wordwall.net/resource/100069070",
+    "embedUrl": "https://wordwall.net/es/embed/db70775b5ed24f9b8f2ba712fc428922?themeId=65&templateId=35&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/db70775b5ed24f9b8f2ba712fc428922_65"
+  },
+  {
+    "nivel": "1basico",
+    "asignatura": "matematicas",
+    "titulo": "Jugando con las Restas",
+    "descripcion": "Actividad para resolver restas simples con apoyo visual. Favorece la comprensión de valor numérico, el razonamiento lógico y el desarrollo del cálculo básico.",
+    "url": "https://wordwall.net/resource/100069717",
+    "embedUrl": "https://wordwall.net/es/embed/6acb01b28ee74c3e88383180885fff82?themeId=22&templateId=71&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/6acb01b28ee74c3e88383180885fff82_0"
+  },
+  {
+    "nivel": "1basico",
+    "asignatura": "matematicas",
+    "titulo": "Quiz de sumas y restas",
+    "descripcion": "Los estudiantes deben resolver sumas y restas simples con apoyo visual. Potencia el cálculo mental, la atención y la comprensión de operaciones básicas.",
+    "url": "https://wordwall.net/resource/100070519",
+    "embedUrl": "https://wordwall.net/es/embed/b861981399fb4148ba46d11d8703608f?themeId=65&templateId=5&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/b861981399fb4148ba46d11d8703608f_65"
+  },
+  {
+    "nivel": "1basico",
+    "asignatura": "ciencias",
+    "titulo": "Adivinemos qué hay detrás",
+    "descripcion": " ",
+    "url": "https://wordwall.net/es/resource/100046885",
+    "embedUrl": "https://wordwall.net/es/embed/8dd48f8d985e487fa4b7a37d2342741b?themeId=21&templateId=68&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/8dd48f8d985e487fa4b7a37d2342741b_0"
+  },
+  {
+    "nivel": "1basico",
+    "asignatura": "ciencias",
+    "titulo": "Cajas misteriosas ",
+    "descripcion": "Responde las preguntas que ayuden a cuidar las plantas y usar correctamente los sentidos.",
+    "url": "https://wordwall.net/es/resource/100046215",
+    "embedUrl": "https://wordwall.net/es/embed/4b84ded95128441b89eeb442289396f8?themeId=52&templateId=30&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/4b84ded95128441b89eeb442289396f8_52"
+  },
+  {
+    "nivel": "1basico",
+    "asignatura": "ciencias",
+    "titulo": "¡Aplasta lo vivo!",
+    "descripcion": "Aplasta solo los seres vivos o partes de plantas, ¡cuidado con los objetos que no son!",
+    "url": "https://wordwall.net/es/resource/100045494",
+    "embedUrl": "https://wordwall.net/es/embed/ed91f1c54c6d46099606294b2dd08af6?themeId=22&templateId=45&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/ed91f1c54c6d46099606294b2dd08af6_0"
+  },
+  {
+    "nivel": "1basico",
+    "asignatura": "historia",
+    "titulo": "Ordena el tiempo",
+    "descripcion": " ",
+    "url": "https://wordwall.net/es/resource/99585213",
+    "embedUrl": "https://wordwall.net/es/embed/584ea2281a0d4feeaef19db4633ab814?themeId=65&templateId=3&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/584ea2281a0d4feeaef19db4633ab814_0"
+  },
+  {
+    "nivel": "1basico",
+    "asignatura": "historia",
+    "titulo": "Símbolos de nuestro país (chile)",
+    "descripcion": " ",
+    "url": "https://wordwall.net/es/resource/97554619",
+    "embedUrl": "https://wordwall.net/es/embed/9b64005b338e442587009dfd70b1526d?themeId=65&templateId=3&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/9b64005b338e442587009dfd70b1526d_0"
+  },
+  {
+    "nivel": "1basico",
+    "asignatura": "historia",
+    "titulo": "Palabras en su lugar",
+    "descripcion": " ",
+    "url": "https://wordwall.net/es/resource/13654785",
+    "embedUrl": "https://wordwall.net/es/embed/1a556db06a9440e0aa84537f3e04806d?themeId=65&templateId=2&fontStackId=0",
+    "miniatura": "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=400&h=250&fit=crop"
+  },
+  {
+    "nivel": "2basico",
+    "asignatura": "lenguaje",
+    "titulo": "Aprendemos las Vocales",
+    "descripcion": " ",
+    "url": "https://wordwall.net/es/resource/100149087",
+    "embedUrl": "https://wordwall.net/es/embed/fb774d0f1cf6497c9d5caff52a450552?themeId=52&templateId=5&fontStackId=0",
+    "icono": "https://cdn-icons-png.flaticon.com/512/2873/2873469.png",
+    "miniatura": "https://screens.cdn.wordwall.net/200/fb774d0f1cf6497c9d5caff52a450552_52"
+  },
+  {
+    "nivel": "2basico",
+    "asignatura": "lenguaje",
+    "titulo": "Ruleta  de la  historia",
+    "descripcion": " ",
+    "url": "https://wordwall.net/es/resource/100145869",
+    "embedUrl": "https://wordwall.net/es/embed/ebdfa0f8ee154f8fba1989a3ea414254?themeId=65&templateId=8&fontStackId=0",
+    "icono": "https://cdn-icons-png.flaticon.com/512/2873/2873469.png",
+    "miniatura": "https://screens.cdn.wordwall.net/200/ebdfa0f8ee154f8fba1989a3ea414254_65"
+  }, 
+  {
+    "nivel": "2basico",
+    "asignatura": "lenguaje",
+    "titulo": "Consruye la oración",
+    "descripcion": " ",
+    "url": "https://wordwall.net/es/resource/100141130",
+    "embedUrl": "https://wordwall.net/es/embed/0f851f63eb384bdc859d0015dc96b1a8?themeId=66&templateId=72&fontStackId=0",
+    "icono": "https://cdn-icons-png.flaticon.com/512/2873/2873469.png",
+    "miniatura": "https://screens.cdn.wordwall.net/200/0f851f63eb384bdc859d0015dc96b1a8_66"
+  }, 
+  {
+    "nivel": "2basico",
+    "asignatura": "matematicas",
+    "titulo": "¿Qué hora es?",
+    "descripcion": " ",
+    "url": "https://wordwall.net/resource/100150648",
+    "embedUrl": "https://wordwall.net/es/embed/f7ebc672aa7f46b08db70a9b91b77fe4?themeId=65&templateId=30&fontStackId=0",
+    "icono": "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+    "miniatura": "https://screens.cdn.wordwall.net/200/f7ebc672aa7f46b08db70a9b91b77fe4_0"
+  },
+  {
+    "nivel": "2basico",
+    "asignatura": "matematicas",
+    "titulo": "Figuras 2D y 3D",
+    "descripcion": " ",
+    "url": "https://wordwall.net/resource/99065673",
+    "embedUrl": "https://wordwall.net/es/embed/e4c965f4d6144e7b824938a9cd5b720e?themeId=48&templateId=81&fontStackId=0",
+    "icono": "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+    "miniatura": "https://screens.cdn.wordwall.net/200/e4c965f4d6144e7b824938a9cd5b720e_48"
+  },
+  {
+    "nivel": "2basico",
+    "asignatura": "matematicas",
+    "titulo": "Mayor, Menor o Igual",
+    "descripcion": " ",
+    "url": "https://wordwall.net/resource/100150772",
+    "embedUrl": "https://wordwall.net/es/embed/319157de2cdf4950a328496507c98064?themeId=65&templateId=5&fontStackId=0",
+    "icono": "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+    "miniatura": "https://screens.cdn.wordwall.net/200/319157de2cdf4950a328496507c98064_65"
+  },
+  {
+    "nivel": "2basico",
+    "asignatura": "ciencias",
+    "titulo": "Cuerpo sano, Vida feliz",
+    "descripcion": " ",
+    "url": "https://wordwall.net/es/resource/100010203",
+    "embedUrl": "https://wordwall.net/es/embed/c1408f1cbb7e4b6dacbf228a99a21d2a?themeId=21&templateId=8&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/c1408f1cbb7e4b6dacbf228a99a21d2a_21"
+  },
+  {
+    "nivel": "2basico",
+    "asignatura": "ciencias",
+    "titulo": "Exploradores del agua y del clima",
+    "descripcion": " ",
+    "url": "https://wordwall.net/es/resource/100010423",
+    "embedUrl": "https://wordwall.net/es/embed/88a6069423894b0cb1efb80094df234c?themeId=55&templateId=81&fontStackId=12",
+    "miniatura": "https://screens.cdn.wordwall.net/200/88a6069423894b0cb1efb80094df234c_55"
+  },
+  {
+    "nivel": "2basico",
+    "asignatura": "ciencias",
+    "titulo": "¿Quién soy?",
+    "descripcion": " ",
+    "url": "https://wordwall.net/es/resource/100010035",
+    "embedUrl": "https://wordwall.net/es/embed/daaacfa25cd6459ea987d9af7b70199e?themeId=53&templateId=3&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/daaacfa25cd6459ea987d9af7b70199e_53"
+  },
+  {
+    "nivel": "2basico",
+    "asignatura": "historia",
+    "titulo": "Uniendo culturas y lugares de chile",
+    "descripcion": " ",
+    "url": "https://wordwall.net/es/resource/100160614",
+    "embedUrl": "https://wordwall.net/es/embed/0e16a3d92ce84a0fb3eafc6ee24459d1?themeId=65&templateId=3&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/0e16a3d92ce84a0fb3eafc6ee24459d1_0"
+  },
+  {
+    "nivel": "2basico",
+    "asignatura": "historia",
+    "titulo": "Descubriendo los pueblos originarios de chile",
+    "descripcion": " ",
+    "url": "https://wordwall.net/es/resource/100151085",
+    "embedUrl": "https://wordwall.net/es/embed/8a3f6b847cda4f578ced1199fb759d29?themeId=65&templateId=5&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/8a3f6b847cda4f578ced1199fb759d29_0"
+  },
+  {
+    "nivel": "2basico",
+    "asignatura": "historia",
+    "titulo": "conociendo nuestro país: norte, centro y sur",
+    "descripcion": " ",
+    "url": "https://wordwall.net/es/resource/99587081",
+    "embedUrl": "https://wordwall.net/es/embed/aa324065c47144f1a978af45200d1437?themeId=65&templateId=30&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/aa324065c47144f1a978af45200d1437_0"
+  },
+  {
+    "nivel": "3basico",
+    "asignatura": "lenguaje",
+    "titulo": "Aprendo y Juego con Palabras",
+    "descripcion": " ",
+    "url": "https://wordwall.net/es/resource/100335983",
+    "embedUrl": "https://wordwall.net/es/embed/33a52e728deb4177a9f377da31e0f856?themeId=57&templateId=76&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/33a52e728deb4177a9f377da31e0f856_57"
+  },
+  {
+    "nivel": "3basico",
+    "asignatura": "lenguaje",
+    "titulo": "Aprendemos las Vocales",
+    "descripcion": " ",
+    "url": "https://wordwall.net/es/resource/11366189",
+    "embedUrl": "https://wordwall.net/es/embed/1a556db06a9440e0aa84537f3e04806d?themeId=65&templateId=2&fontStackId=0",
+    "miniatura": "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=400&h=250&fit=crop"
+  }, 
+  {
+    "nivel": "3basico",
+    "asignatura": "lenguaje",
+    "titulo": "Aprendemos las Vocales",
+    "descripcion": " ",
+    "url": "https://wordwall.net/es/resource/11366189",
+    "embedUrl": "https://wordwall.net/es/embed/1a556db06a9440e0aa84537f3e04806d?themeId=65&templateId=2&fontStackId=0",
+    "miniatura": "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=400&h=250&fit=crop"
+  }, 
+  {
+    "nivel": "3basico",
+    "asignatura": "matematicas",
+    "titulo": "Adivina la palabra matemática",
+    "descripcion": "Escucha o lee la pista y adivina la palabra matemática. Cada letra correcta te acerca a descubrir la palabra.",
+    "url": "https://wordwall.net/resource/100153941",
+    "embedUrl": "ttps://wordwall.net/es/embed/6aad86fcf1b546cc9444e5598dae4744?themeId=66&templateId=73&fontStackId=2",
+    "miniatura": "https://screens.cdn.wordwall.net/200/6aad86fcf1b546cc9444e5598dae4744_66"
+  },
+  {
+    "nivel": "3basico",
+    "asignatura": "matematicas",
+    "titulo": "Descubre el número",
+    "descripcion": "Mira el número en la tarjeta y di cómo se escribe en palabras. Luego gira la tarjeta para ver si acertaste.",
+    "url": "https://wordwall.net/resource/100156153",
+    "embedUrl": "https://wordwall.net/es/embed/49a61b411d994521ada9f2a7f53cb529?themeId=65&templateId=76&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/49a61b411d994521ada9f2a7f53cb529_65"
+  },
+  {
+    "nivel": "3basico",
+    "asignatura": "matematicas",
+    "titulo": "Atrapa la fruta con el número correcto",
+    "descripcion": "Mira la operación en la parte superior.  Calcula el resultado.  Atrapa la fruta con el número correcto.",
+    "url": "https://wordwall.net/es/resource/100154861",
+    "embedUrl": "https://wordwall.net/es/embed/6e1b7eaedc3641978bd3286d43ff68cd?themeId=27&templateId=82&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/6e1b7eaedc3641978bd3286d43ff68cd_0"
+  },
+  {
+    "nivel": "3basico",
+    "asignatura": "ciencias",
+    "titulo": "Adivina el alimento",
+    "descripcion": " ",
+    "url": "https://wordwall.net/es/resource/100043972",
+    "embedUrl": "https://wordwall.net/es/embed/3e04dc54476d4ea387431da6b3f814e7?themeId=66&templateId=73&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/3e04dc54476d4ea387431da6b3f814e7_66"
+  },
+  {
+    "nivel": "3basico",
+    "asignatura": "ciencias",
+    "titulo": "Las plantas y su vida",
+    "descripcion": " ",
+    "url": "https://wordwall.net/es/resource/100009561",
+    "embedUrl": "https://wordwall.net/es/embed/29936ce0ec4b4aa4951b50ccdf894478?themeId=46&templateId=48&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/29936ce0ec4b4aa4951b50ccdf894478_0"
+  },
+  {
+    "nivel": "3basico",
+    "asignatura": "ciencias",
+    "titulo": "¿Qué órgano es?",
+    "descripcion": " ",
+    "url": "https://wordwall.net/es/resource/100044975",
+    "embedUrl": "https://wordwall.net/es/embed/35e8c49ee9f14702ab3fd84db01b0d41?themeId=48&templateId=46&fontStackId=12",
+    "miniatura": "https://screens.cdn.wordwall.net/200/35e8c49ee9f14702ab3fd84db01b0d41_48"
+  },
+  {
+    "nivel": "3basico",
+    "asignatura": "historia",
+    "titulo": "Viaje Climático",
+    "descripcion": " ",
+    "url": "https://wordwall.net/resource/100159104",
+    "embedUrl": "https://wordwall.net/embed/03beef3a02aa42eab20846b71ca2666b?themeId=65&templateId=30&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/03beef3a02aa42eab20846b71ca2666b_0"
+  },
+  {
+    "nivel": "3basico",
+    "asignatura": "historia",
+    "titulo": "Zonas Natural de Chile",
+    "descripcion": " ",
+    "url": "https://wordwall.net/es/resource/99591135",
+    "embedUrl": "https://wordwall.net/es/embed/6cfb6238b76940b7b684b808bc81844b?themeId=65&templateId=5&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/6cfb6238b76940b7b684b808bc81844b_0"
+  },
+  {
+    "nivel": "3basico",
+    "asignatura": "historia",
+    "titulo": "Medio ambiente",
+    "descripcion": " ",
+    "url": "https://wordwall.net/es/resource/99584579",
+    "embedUrl": "https://wordwall.net/es/embed/7573a79554c247f4bc6e0abb1f119de8?themeId=65&templateId=46&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/7573a79554c247f4bc6e0abb1f119de8_21"
+  },
+  {
+    "nivel": "4basico",
+    "asignatura": "lenguaje",
+    "titulo": "Palabra y dibujo",
+    "descripcion": " ",
+    "url": "https://wordwall.net/es/resource/100145578",
+    "embedUrl": "https://wordwall.net/es/embed/414df25da864485a964da43b5e84f955?themeId=65&templateId=46&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/414df25da864485a964da43b5e84f955_65"
+  },
+  {
+    "nivel": "4basico",
+    "asignatura": "lenguaje",
+    "titulo": "Un día en el parque",
+    "descripcion": " ",
+    "url": "https://wordwall.net/es/resource/100148987",
+    "embedUrl": "https://wordwall.net/es/embed/70e085619ceb40b3868c001f7c3bf327?themeId=46&templateId=5&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/70e085619ceb40b3868c001f7c3bf327_46"
+  }, 
+  {
+    "nivel": "4basico",
+    "asignatura": "lenguaje",
+    "titulo": "Elige la palabra correcta",
+    "descripcion": " ",
+    "url": "https://wordwall.net/es/resource/100150346",
+    "embedUrl": "https://wordwall.net/es/embed/1fb7f24825e945fa93f33341886d7bc3?themeId=52&templateId=5&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/1fb7f24825e945fa93f33341886d7bc3_52"
+  }, 
+  {
+    "nivel": "4basico",
+    "asignatura": "matematicas",
+    "titulo": "Relaciona formas",
+    "descripcion": " ",
+    "url": "https://wordwall.net/resource/100069037",
+    "embedUrl": "https://wordwall.net/es/embed/97542db76aa2450ebf28019775951dba?themeId=65&templateId=88&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/97542db76aa2450ebf28019775951dba_65"
+  },
+  {
+    "nivel": "4basico",
+    "asignatura": "matematicas",
+    "titulo": "Clasifica figuras",
+    "descripcion": " ",
+    "url": "https://wordwall.net/resource/100066958",
+    "embedUrl": "https://wordwall.net/es/embed/15cb416fb9cd4671a2823b95426ed35c?themeId=44&templateId=81&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/15cb416fb9cd4671a2823b95426ed35c_44"
+  },
+  {
+    "nivel": "4basico",
+    "asignatura": "matematicas",
+    "titulo": "Reparte canicas",
+    "descripcion": "Fernanda tiene 300 canicas y quiere darle 50 a Dannae, 50 a Denisse y 50 a Constanza. le ayudas?.",
+    "url": "https://wordwall.net/es/resource/10435294",
+    "embedUrl": "https://wordwall.net/es/embed/8b6a3106e08740f582f1b5083682f63c?themeId=65&templateId=8&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/8b6a3106e08740f582f1b5083682f63c_65"
+  },
+  {
+    "nivel": "4basico",
+    "asignatura": "ciencias",
+    "titulo": "Cuidemos nuestro cuerpo y nuestro entorno",
+    "descripcion": "Comprender la importancia del uso adecuado de los recursos, alimentación saludable y la luz a través de un verdadero o falso.",
+    "url": "https://wordwall.net/es/resource/99995981",
+    "embedUrl": "https://wordwall.net/es/embed/8a6d8c42a7ae4792b6adbbc441d9bbdc?themeId=59&templateId=35&fontStackId=12",
+    "miniatura": "https://screens.cdn.wordwall.net/200/8a6d8c42a7ae4792b6adbbc441d9bbdc_59"
+  },
+  {
+    "nivel": "4basico",
+    "asignatura": "ciencias",
+    "titulo": "Empareja cada parte de las palabras con su función",
+    "descripcion": " ",
+    "url": "https://wordwall.net/es/resource/99964252",
+    "embedUrl": "https://wordwall.net/es/embed/6fccb80b4c2c45f2882a983946b66c75?themeId=51&templateId=3&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/6fccb80b4c2c45f2882a983946b66c75_51"
+  },
+  {
+    "nivel": "4basico",
+    "asignatura": "ciencias",
+    "titulo": "Explorando la luz, el sonido y el universo",
+    "descripcion": " ",
+    "url": "https://wordwall.net/es/resource/99996803",
+    "embedUrl": "https://wordwall.net/es/embed/9b657023e8c543399cd263388c0d4aaf?themeId=23&templateId=71&fontStackId=12",
+    "miniatura": "https://screens.cdn.wordwall.net/200/9b657023e8c543399cd263388c0d4aaf_23b"
+  },
+  {
+    "nivel": "4basico",
+    "asignatura": "historia",
+    "titulo": "Juntos construimos el respeto",
+    "descripcion": " ",
+    "url": "https://wordwall.net/es/resource/99589610",
+    "embedUrl": "https://wordwall.net/es/embed/108fa182dd1944ec84a3cb2727abaff9?themeId=65&templateId=30&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/108fa182dd1944ec84a3cb2727abaff9_0"
+  },
+  {
+    "nivel": "4basico",
+    "asignatura": "historia",
+    "titulo": "conquista de america y chile",
+    "descripcion": " ",
+    "url": "https://wordwall.net/es/resource/100148624",
+    "embedUrl": "https://wordwall.net/es/embed/4db29b6ac9e240b1a957479aa9583eaf?themeId=55&templateId=25&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/4db29b6ac9e240b1a957479aa9583eaf_55"
+  },
+  {
+    "nivel": "4basico",
+    "asignatura": "historia",
+    "titulo": "Zivilizaciones antiguas",
+    "descripcion": " ",
+    "url": "https://wordwall.net/es/resource/99588064",
+    "embedUrl": "https://wordwall.net/es/embed/cacacd1e10284fa59c1807d709df0b56?themeId=65&templateId=25&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/cacacd1e10284fa59c1807d709df0b56_0"
+  },
+  {
+    "nivel": "5basico",
+    "asignatura": "lenguaje",
+    "titulo": "Lee con ritmo y emoción",
+    "descripcion": " ",
+    "url": "https://wordwall.net/es/resource/100148545",
+    "embedUrl": "https://wordwall.net/es/embed/fd9a659abefb4b11b0129e9310e1b432?themeId=65&templateId=8&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/fd9a659abefb4b11b0129e9310e1b432_0"
+  },
+  {
+    "nivel": "5basico",
+    "asignatura": "lenguaje",
+    "titulo": "Ordena la  oración",
+    "descripcion": " ",
+    "url": "https://wordwall.net/es/resource/100152618",
+    "embedUrl": "https://wordwall.net/es/embed/ce2ac44144434e418c7599b2f7d04abf?themeId=45&templateId=72&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/ce2ac44144434e418c7599b2f7d04abf_0"
+  }, 
+  {
+    "nivel": "5basico",
+    "asignatura": "lenguaje",
+    "titulo": "Elige la que está correctamente escrita",
+    "descripcion": " ",
+    "url": "https://wordwall.net/es/resource/100152037",
+    "embedUrl": "https://wordwall.net/es/embed/4e23b9cc78d14f3082cb00a6310218c8?themeId=65&templateId=5&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/4e23b9cc78d14f3082cb00a6310218c8_0"
+  }, 
+  {
+    "nivel": "5basico",
+    "asignatura": "matematicas",
+    "titulo": "Números naturales y su valor posicional",
+    "descripcion": "Actividad diseñada para reforzar aprendizaje matematico, a través de preguntas adaptadas, los estudiantes podrán explorar conceptos clave sobre numeración.",
+    "url": "https://wordwall.net/es/resource/99897859",
+    "embedUrl": "https://wordwall.net/es/embed/ae49abfd29554dc48a997416769f1e99?themeId=65&templateId=5&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/ae49abfd29554dc48a997416769f1e99_65"
+  },
+  {
+    "nivel": "5basico",
+    "asignatura": "matematicas",
+    "titulo": "Multiplicación para todos: comprensión y estrategia",
+    "descripcion": "Actividad orientada a la comprensión del concepto de multiplicación y estrategias de resolución.",
+    "url": "https://wordwall.net/es/resource/99955268",
+    "embedUrl": "https://wordwall.net/es/embed/43d046f46d474161abd5b26e37889f2f?themeId=59&templateId=69&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/43d046f46d474161abd5b26e37889f2f_59"
+  },
+  {
+    "nivel": "5basico",
+    "asignatura": "matematicas",
+    "titulo": "Matemática en la vida cotidiana",
+    "descripcion": "Esta actividad permite aplicar conceptos matemáticos báscios en situaciones reales relacionadas con el dinero.",
+    "url": "https://wordwall.net/es/resource/99960800",
+    "embedUrl": "https://wordwall.net/es/embed/3d00062b75b642e0a28082f545cf2dfd?themeId=66&templateId=49&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/3d00062b75b642e0a28082f545cf2dfd_66"
+  },
+  {
+    "nivel": "5basico",
+    "asignatura": "ciencias",
+    "titulo": "Ciencia en acción. Misión sustentable",
+    "descripcion": " ",
+    "url": "https://wordwall.net/es/resource/99946314",
+    "embedUrl": "https://wordwall.net/es/embed/b17465cd87794b9baa1e1d41d948de71?themeId=49&templateId=36&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/b17465cd87794b9baa1e1d41d948de71_49"
+  },
+  {
+    "nivel": "5basico",
+    "asignatura": "ciencias",
+    "titulo": "Conociendo el planeta vivo",
+    "descripcion": "Hay palabras clave escondidas en una sopa de letras, encuentralas con ayuda de las pistas.",
+    "url": "https://wordwall.net/es/resource/99943657",
+    "embedUrl": "https://wordwall.net/es/embed/1b10d15460724f818ad0e5246b98c269?themeId=2&templateId=10&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/1b10d15460724f818ad0e5246b98c269_0"
+  },
+  {
+    "nivel": "5basico",
+    "asignatura": "ciencias",
+    "titulo": "Desafío ciencia total",
+    "descripcion": " ",
+    "url": "https://wordwall.net/es/resource/99945158",
+    "embedUrl": "https://wordwall.net/es/embed/01abed0a74964192b7b934212ec81d01?themeId=65&templateId=5&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/01abed0a74964192b7b934212ec81d01_65"
+  },
+  {
+    "nivel": "5basico",
+    "asignatura": "historia",
+    "titulo": "Definición o ejemplo",
+    "descripcion": " ",
+    "url": "https://wordwall.net/es/resource/100159222",
+    "embedUrl": "https://wordwall.net/es/embed/5e55f78b99db405dbbdd2ad9ee421374?themeId=65&templateId=8&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/5e55f78b99db405dbbdd2ad9ee421374_0"
+  },
+  {
+    "nivel": "5basico",
+    "asignatura": "historia",
+    "titulo": "El Sistema Solar",
+    "descripcion": " ",
+    "url": "https://wordwall.net/es/resource/13654785",
+    "embedUrl": "https://wordwall.net/es/embed/1a556db06a9440e0aa84537f3e04806d?themeId=65&templateId=2&fontStackId=0",
+    "miniatura": "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=400&h=250&fit=crop"
+  },
+  {
+    "nivel": "5basico",
+    "asignatura": "historia",
+    "titulo": "El Sistema Solar",
+    "descripcion": " ",
+    "url": "https://wordwall.net/es/resource/13654785",
+    "embedUrl": "https://wordwall.net/es/embed/1a556db06a9440e0aa84537f3e04806d?themeId=65&templateId=2&fontStackId=0",
+    "miniatura": "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=400&h=250&fit=crop"
+  },
+  {
+    "nivel": "6basico",
+    "asignatura": "lenguaje",
+    "titulo": "Aprendemos las Vocales",
+    "descripcion": " ",
+    "url": "https://wordwall.net/es/resource/100337074",
+    "embedUrl": "https://wordwall.net/es/embed/311ad47d109c423c88041ef2f525147b?themeId=66&templateId=38&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/311ad47d109c423c88041ef2f525147b_66"
+  },
+  {
+    "nivel": "6basico",
+    "asignatura": "lenguaje",
+    "titulo": "Historias desordenadas",
+    "descripcion": " ",
+    "url": "https://wordwall.net/es/resource/101266156",
+    "embedUrl": "https://wordwall.net/es/embed/3d69395bdb284533bc941ae036dbaaa7?themeId=65&templateId=72&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/3d69395bdb284533bc941ae036dbaaa7_0"
+  }, 
+  {
+    "nivel": "6basico",
+    "asignatura": "lenguaje",
+    "titulo": "¡Atrapa las palabras del cuento!",
+    "descripcion": " ",
+    "url": "https://wordwall.net/es/resource/100339423",
+    "embedUrl": "https://wordwall.net/es/embed/148d74d6959d48d1ad09619bb5b5e010?themeId=59&templateId=25&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/148d74d6959d48d1ad09619bb5b5e010_59"
+  }, 
+  {
+    "nivel": "6basico",
+    "asignatura": "matematicas",
+    "titulo": "Pensando en fracciones",
+    "descripcion": "El estudiante debe leer el enunciado, luego calcular y resolver para finalmente escribir su respuesta.",
+    "url": "https://wordwall.net/es/resource/100074306",
+    "embedUrl": "https://wordwall.net/es/embed/179ce6eb99734c2a9a24aea6ae420733?themeId=65&templateId=89&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/179ce6eb99734c2a9a24aea6ae420733_0"
+  },
+  {
+    "nivel": "6basico",
+    "asignatura": "matematicas",
+    "titulo": "Representando potencias",
+    "descripcion": "El evaluado debe seleccionar la manera correcta de representar la fracción (ejercicios 1,2 y 3). Posteriormente la representación y resultado.",
+    "url": "https://wordwall.net/es/resource/100075135",
+    "embedUrl": "https://wordwall.net/es/embed/b1fcb444f05f41ad9b3a8b048ca5876a?themeId=21&templateId=69&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/b1fcb444f05f41ad9b3a8b048ca5876a_0"
+  },
+  {
+    "nivel": "6basico",
+    "asignatura": "matematicas",
+    "titulo": "Calcula y encuentra su pareja",
+    "descripcion": "El alumno deberá leer cada descripción y calcular ya sea mentalmente o escrito, luego tendrá que ubicar la descripción con el resultado correspondiente.",
+    "url": "https://wordwall.net/es/resource/100072039",
+    "embedUrl": "https://wordwall.net/es/embed/4b0245baff074c51989afc222a962d63?themeId=65&templateId=3&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/4b0245baff074c51989afc222a962d63_0"
+  },
+  {
+    "nivel": "6basico",
+    "asignatura": "ciencias",
+    "titulo": "Descubriendo la Tierra y el Universo",
+    "descripcion": "Observar, asociar y ordenar procesos naturales.",
+    "url": "https://wordwall.net/es/resource/99893529/6to-básico-descubriendo-la-tierra-y-el-universo-ciencias?ref=embed-image",
+    "embedUrl": "https://wordwall.net/es/embed/beac21fccbcd4f6e892402458fdea952?themeId=65&templateId=3&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/beac21fccbcd4f6e892402458fdea952_65"
+  },
+  {
+    "nivel": "6basico",
+    "asignatura": "ciencias",
+    "titulo": "Energía en Acción",
+    "descripcion": "Clasificar, responder y completar las frases relacionadas con el uso de energía, el calor y el cuidado de la salud frente a sustancias dañinas.",
+    "url": "https://wordwall.net/es/resource/99892875",
+    "embedUrl": "https://wordwall.net/es/embed/09accb69889f47618d9e5654e4bd1192?themeId=65&templateId=36&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/09accb69889f47618d9e5654e4bd1192_65"
+  },
+  {
+    "nivel": "6basico",
+    "asignatura": "ciencias",
+    "titulo": "Exploradores del cuerpo y la naturaleza",
+    "descripcion": "Relacionar conceptos de la vida y el cuerpo humano con su descripción o función.",
+    "url": "https://wordwall.net/es/resource/99588790",
+    "embedUrl": "https://wordwall.net/es/embed/7f65a6e2bdf24c1c9f0c51a40f30753c?themeId=65&templateId=5&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/7f65a6e2bdf24c1c9f0c51a40f30753c_65"
+  },
+  {
+    "nivel": "6basico",
+    "asignatura": "historia",
+    "titulo": "Ambientes naturales y regiones de Chile",
+    "descripcion": " ",
+    "url": "https://wordwall.net/es/resource/100158874",
+    "embedUrl": "https://wordwall.net/es/embed/d2aec39af64641b781d24bf8a64caebd?themeId=65&templateId=5&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/d2aec39af64641b781d24bf8a64caebd_0"
+  },
+  {
+    "nivel": "6basico",
+    "asignatura": "historia",
+    "titulo": "Dictadura en Chile",
+    "descripcion": " ",
+    "url": "https://wordwall.net/es/resource/100158582",
+    "embedUrl": "https://wordwall.net/es/embed/107ad8a4af9f45b98ace6c850fa1c25c?themeId=65&templateId=5&fontStackId=0",
+    "miniatura": "https://screens.cdn.wordwall.net/200/107ad8a4af9f45b98ace6c850fa1c25c_0"
+  },
+  {
+    "nivel": "6basico",
+    "asignatura": "historia",
+    "titulo": "El Sistema Solar",
+    "descripcion": " ",
+    "url": "https://wordwall.net/es/resource/13654785",
+    "embedUrl": "https://wordwall.net/es/embed/1a556db06a9440e0aa84537f3e04806d?themeId=65&templateId=2&fontStackId=0",
+    "miniatura": "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=400&h=250&fit=crop"
+  }
+]

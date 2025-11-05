@@ -1,0 +1,146 @@
+@import url("variables.css");
+
+/* =====================================
+   MAIN.CSS
+   Estructura principal del sitio
+   ===================================== */
+
+body {
+  font-family: var(--fuente-principal);
+  background-color: var(--color-blanco);
+  color: var(--color-negro);
+  line-height: 1.6;
+}
+
+/* ---------- HERO PRINCIPAL ---------- */
+.hero {
+  background: linear-gradient(
+      rgba(49, 170, 193, 0.5),
+      rgba(49, 170, 193, 0.5)
+    ),
+    url(../img/img-grupo/hero-psp.jpeg)
+      center/cover no-repeat;
+  color: var(--color-blanco);
+  min-height: 80vh;
+  padding: 4rem 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--color-blanco);
+}
+
+.hero p {
+  font-size: 1.25rem;
+  max-width: 700px;
+  margin: 0 auto 2rem auto;
+}
+
+/* ---------- BOTÓN HERO ---------- */
+.btn-hero {
+  background-color: var(--color-secundario);
+  color: var(--color-blanco);
+  font-weight: 600;
+  border: none;
+  border-radius: var(--radio-btn);
+  padding: 0.75rem 2rem;
+  cursor: pointer;
+  transition: var(--transicion-base);
+}
+
+.btn-hero:hover {
+  background-color: var(--color-primario);
+  transform: scale(1.05);
+}
+
+/* ---------- ICONOS ---------- */
+.icon {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+/* ---------- SECCIÓN CTA ---------- */
+.cta {
+  background-color: var(--color-primario);
+  color: var(--color-blanco);
+  padding: 3rem 1rem;
+  text-align: center;
+}
+
+.cta h2 {
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.cta button {
+  background-color: var(--color-acento);
+  color: var(--color-negro);
+  font-weight: 600;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: var(--radio-btn);
+  transition: var(--transicion-base);
+}
+
+.cta button:hover {
+  background-color: var(--color-secundario);
+  color: var(--color-blanco);
+}
+
+/* ---------- FOOTER ---------- */
+footer {
+  background-color: #023047;
+  color: var(--color-blanco);
+  padding: 1.5rem 0;
+  text-align: center;
+}
+
+footer a {
+  color: var(--color-acento);
+  text-decoration: none;
+  font-weight: 500;
+  transition: var(--transicion-base);
+}
+
+footer a:hover {
+  color: var(--color-secundario);
+  text-decoration: underline;
+}
+
+footer p{
+  color: #e8e8e8;
+}
+
+/* ---------- FORMULARIOS (CONTACTO) ---------- */
+form input,
+form textarea {
+  border-radius: var(--radio-base);
+  border: 1px solid #ccc;
+  padding: 0.75rem;
+  width: 100%;
+  transition: var(--transicion-base);
+}
+
+form input:focus,
+form textarea:focus {
+  border-color: var(--color-primario);
+  box-shadow: 0 0 0 0.2rem rgba(49, 170, 193, 0.25);
+  outline: none;
+}
+
+#estadoEnvio {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+  text-align: center;
+  color: var(--color-primario);
+}

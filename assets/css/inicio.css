@@ -1,0 +1,116 @@
+@import url("variables.css");
+
+/* =====================================
+   INICIO.CSS
+   Página principal o de bienvenida
+   ===================================== */
+
+body {
+  background-color: var(--color-blanco);
+  color: var(--color-negro);
+  font-family: var(--fuente-principal);
+}
+
+/* ---------- TÍTULOS ---------- */
+h1,
+h2,
+h3 {
+  font-family: var(--fuente-secundaria);
+  color: var(--color-primario);
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+/* ---------- TARJETAS (CARDS) ---------- */
+.card {
+  border-radius: var(--radio-card);
+  background-color: var(--color-blanco);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: var(--transicion-suave);
+  overflow: hidden;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--sombra-flotante);
+}
+
+/* ---------- TEXTOS ---------- */
+.text-primary {
+  color: var(--color-secundario) !important;
+}
+
+.text-secondary {
+  color: var(--color-primario) !important;
+}
+
+.text-accent {
+  color: var(--color-acento) !important;
+}
+
+/* ---------- BOTONES ---------- */
+.btn {
+  background-color: var(--color-secundario);
+  color: var(--color-blanco);
+  border: none;
+  border-radius: var(--radio-btn);
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  transition: var(--transicion-base);
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: var(--color-primario);
+  transform: scale(1.05);
+}
+
+/* ---------- SECCIONES ---------- */
+.section {
+  padding: var(--espaciado-lg) var(--espaciado-md);
+  text-align: center;
+}
+
+.section-alt {
+  background-color: var(--color-gris-claro);
+}
+
+.section h2 {
+  color: var(--color-secundario);
+  margin-bottom: 1.5rem;
+}
+
+/* ---------- HERO DE INICIO ---------- */
+.hero-inicio {
+  background: linear-gradient(135deg, var(--color-primario), var(--color-secundario));
+  color: var(--color-blanco);
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+  animation: fadeIn 1s ease-in-out;
+}
+
+.hero-inicio h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.hero-inicio p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+/* ---------- ANIMACIONES ---------- */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease-in-out both;
+}

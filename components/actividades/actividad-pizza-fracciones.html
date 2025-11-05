@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fracciones con Pizza - Matemática 5° Básico</title>
+    <link rel="stylesheet" href="css/actividad-pizza-fracciones.css">
+</head>
+<body>
+    
+    <!-- actividad -->
+     <div class="actividad-container">
+        <header class="actividad-header">
+            <h1>🍕 Aprendiendo Fracciones con Pizza</h1>
+            <div class="nivel-info">
+                <span class="asignatura">Matemática</span>
+                <span class="curso">5° Básico</span>
+                <div class="puntuacion">
+                    <span>Puntos: </span>
+                    <span id="puntos">0</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="modos-juego">
+            <button class="modo-btn active" data-modo="construir">Construir Fracciones</button>
+            <button class="modo-btn" data-modo="comparar">Comparar Fracciones</button>
+            <button class="modo-btn" data-modo="equivalente">Fracciones Equivalentes</button>
+        </div>
+
+        <main class="actividad-main">
+            <!-- MODO CONSTRUIR -->
+            <div class="modo-container active" id="modoConstruir">
+                <div class="instrucciones">
+                    <h2>¡Construye la fracción correcta!</h2>
+                    <p>Arrastra las porciones de pizza al plato para formar la fracción indicada.</p>
+                </div>
+
+                <div class="juego-area">
+                    <div class="pizza-origen">
+                        <h3>Pizza Completa</h3>
+                        <div class="pizza-completa" id="pizzaOrigen">
+                            <!-- Porciones generadas dinámicamente -->
+                        </div>
+                    </div>
+
+                    <div class="objetivo-area">
+                        <div class="fraccion-objetivo">
+                            <span id="fraccionNumerador">1</span>
+                            <hr>
+                            <span id="fraccionDenominador">4</span>
+                        </div>
+                        <div class="plato" id="platoDestino">
+                            <span class="instruccion-arrastre">Suelta aquí las porciones</span>
+                        </div>
+                        <div class="contador-porciones">
+                            <span id="porcionesActual">0</span>/<span id="porcionesNecesarias">1</span> porciones
+                        </div>
+                    </div>
+                </div>
+
+                <div class="controles">
+                    <button id="siguienteBtn" class="btn-siguiente">Siguiente ➡</button>
+                    <button id="verificarConstruirBtn" class="btn-verificar">Verificar</button>
+                </div>
+            </div>
+
+            <!-- MODO COMPARAR -->
+            <div class="modo-container" id="modoComparar">
+                <div class="instrucciones">
+                    <h2>¡Compara las fracciones!</h2>
+                    <p>Selecciona el símbolo correcto para comparar las dos fracciones.</p>
+                </div>
+
+                <div class="comparacion-area">
+                    <div class="fraccion-comparacion">
+                        <div class="pizza-comparacion" id="pizzaComparacion1"></div>
+                        <span class="fraccion-texto" id="fraccionTexto1">1/2</span>
+                    </div>
+
+                    <div class="simbolos-comparacion">
+                        <button class="simbolo-btn" data-simbolo="<">&lt;</button>
+                        <button class="simbolo-btn" data-simbolo="=">=</button>
+                        <button class="simbolo-btn" data-simbolo=">">&gt;</button>
+                    </div>
+
+                    <div class="fraccion-comparacion">
+                        <div class="pizza-comparacion" id="pizzaComparacion2"></div>
+                        <span class="fraccion-texto" id="fraccionTexto2">1/4</span>
+                    </div>
+                </div>
+
+                <div class="controles">
+                    <button id="siguienteCompararBtn" class="btn-siguiente">Siguiente ➡</button>
+                </div>
+            </div>
+
+            <!-- MODO EQUIVALENTES -->
+            <div class="modo-container" id="modoEquivalente">
+                <div class="instrucciones">
+                    <h2>¡Encuentra las fracciones equivalentes!</h2>
+                    <p>Selecciona todas las fracciones que son equivalentes a la mostrada.</p>
+                </div>
+
+                <div class="equivalente-area">
+                    <div class="fraccion-modelo">
+                        <div class="pizza-modelo" id="pizzaModelo"></div>
+                        <span class="fraccion-texto-grande" id="fraccionModeloTexto">1/2</span>
+                    </div>
+
+                    <div class="opciones-equivalentes">
+                        <div class="opcion-equivalente" data-fraccion="2/4">
+                            <div class="pizza-opcion"></div>
+                            <span class="fraccion-texto">2/4</span>
+                        </div>
+                        <div class="opcion-equivalente" data-fraccion="3/6">
+                            <div class="pizza-opcion"></div>
+                            <span class="fraccion-texto">3/6</span>
+                        </div>
+                        <div class="opcion-equivalente" data-fraccion="1/3">
+                            <div class="pizza-opcion"></div>
+                            <span class="fraccion-texto">1/3</span>
+                        </div>
+                        <div class="opcion-equivalente" data-fraccion="3/4">
+                            <div class="pizza-opcion"></div>
+                            <span class="fraccion-texto">3/4</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="controles">
+                    <button id="verificarEquivalenteBtn" class="btn-verificar">Verificar</button>
+                    <button id="siguienteEquivalenteBtn" class="btn-siguiente">Siguiente ➡</button>
+                </div>
+            </div>
+
+            <div class="feedback-area">
+                <div class="feedback" id="feedback">
+                    <p>¡Bienvenido! Selecciona un modo de juego para comenzar.</p>
+                </div>
+                <div class="progreso">
+                    <span>Progreso: </span>
+                    <span id="progresoActual">0</span>/<span id="progresoTotal">10</span>
+                </div>
+            </div>
+        </main>
+
+        <div class="explicacion-contenedor">
+            <button class="btn-explicacion" id="btnExplicacion">📚 Ver Explicación</button>
+            <div class="explicacion" id="explicacion">
+                <h3>¿Qué son las fracciones?</h3>
+                <p>Una fracción representa partes de un todo. El número de arriba se llama <strong>numerador</strong> e indica cuántas partes tenemos. El número de abajo se llama <strong>denominador</strong> e indica en cuántas partes se dividió el todo.</p>
+                <div class="ejemplo-fraccion">
+                    <div class="fraccion-ejemplo">
+                        <span class="numerador">3</span>
+                        <hr>
+                        <span class="denominador">4</span>
+                    </div>
+                    <p class="texto-ejemplo">= 3 partes de 4 totales</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- actividad -->
+
+    <script src="js/actividad-pizza-fracciones.js"></script>
+</body>
+</html>

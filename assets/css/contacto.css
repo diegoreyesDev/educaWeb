@@ -1,0 +1,28 @@
+@import url("variables.css");
+
+/* === PÁGINA DE CONTACTO === */
+
+form {
+  max-width: 600px;
+  margin: 2rem auto;
+}
+
+form input,
+form textarea {
+  border-radius: var(--radio);
+  border: 2px solid var(--color-acento);
+  padding: 0.75rem;
+}
+
+form input:focus,
+form textarea:focus {
+  border-color: var(--color-primario);
+  box-shadow: 0 0 0 0.2rem rgba(255, 0, 128, 0.2);
+}
+
+#estadoEnvio {
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  text-align: center;
+  color: var(--color-acento);
+}

@@ -1,0 +1,78 @@
+@import url("variables.css");
+
+/* === ESTILOS BASE === */
+
+body {
+  font-family: var(--fuente-principal);
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--fuente-secundaria);
+  font-weight: 700;
+  color: var(--color-acento);
+}
+
+a {
+  color: var(--color-primario);
+  text-decoration: none;
+  transition: var(--transicion-base);
+}
+
+a:hover {
+  color: var(--color-secundario);
+}
+
+/* === BOTONES === */
+.btn {
+  background-color: var(--color-primario);
+  color: #fff;
+  border: none;
+  border-radius: var(--radio);
+  padding: 0.6rem 1.2rem;
+  font-weight: 600;
+  transition: var(--transicion-base);
+}
+
+.btn:hover {
+  background-color: var(--color-acento);
+}
+
+/* === TARJETAS === */
+.card {
+  border-radius: var(--radio);
+  box-shadow: var(--sombra-base);
+  transition: var(--transicion-base);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+/* === FOOTER === */
+footer {
+  background-color: var(--color-footer);
+  color: #f2f2f2;
+  text-align: center;
+  padding: 1.5rem 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  letter-spacing: 0.3px;
+}
+
+footer a {
+  color: var(--color-secundario);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+footer a:hover {
+  color: #ffffff; /* O un tono más claro del secundario */
+}
+/* === FOOTER === */
+

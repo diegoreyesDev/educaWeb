@@ -1,0 +1,26 @@
+:root {
+  /* NUEVA PALETA DE COLORES ARMONIZADA */
+    --color-primario: #2A9D8F;      /* Verde océano */
+  --color-secundario: #E9C46A;    /* Amarillo arena */
+  --color-acento: #F4A261;        /* Naranja atardecer */
+  --color-complementario: #264653; /* Azul profundo */
+  
+  /* COLORES NEUTROS */
+   --color-fondo: #FEFAE0;
+  --color-texto: #2D3748;
+  --color-footer: #1B4332;
+  --color-sombra: rgba(0, 0, 0, 0.08);
+  
+  /* COLORES ADICIONALES PARA INTERACCIÓN */
+  --color-exito: #06D6A0;
+  --color-alerta: #EF476F;
+  
+  /* ESTILOS GENERALES */
+  --transicion-base: all 0.3s ease;
+  --sombra-base: 0 4px 12px var(--color-sombra);
+  --radio: 12px;
+  
+  /* TIPOGRAFÍAS */
+  --fuente-principal: "Nunito", sans-serif;
+  --fuente-secundaria: "Comic Neue", cursive;
+}
