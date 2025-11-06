@@ -1,4 +1,4 @@
-// analizador.js - VERSIÓN MEJORADA Y COMPLETA
+// analizador
 class Analizador {
     constructor() {
         console.log('🔧 Constructor Analizador llamado');
@@ -390,7 +390,7 @@ class Analizador {
         return `
             <div class="paso-resolucion-detallado">
                 <div class="operacion-principal mb-3 p-3 bg-light rounded">
-                    <h6>📝 Operación realizada:</h6>
+                    <h6>Operación realizada:</h6>
                     <div class="fs-5 fw-bold">${paso.operacion}</div>
                 </div>
                 

@@ -419,11 +419,3 @@ class CalculadoraCientifica {
         return this.ultimoResultado;
     }
 }
-
-// ELIMINAR estas líneas comentadas al final - ya no son necesarias
-// let calculadora;
-// document.addEventListener("DOMContentLoaded", function () {
-//   calculadora = new CalculadoraCientifica();
-//   window.calculadora = calculadora;
-//   console.log("✅ Calculadora científica cargada correctamente");
-// });

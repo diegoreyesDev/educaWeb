@@ -1,6 +1,6 @@
 @import url("variables.css");
 
-/* === PÁGINA DE ACTIVIDADES === */
+/*  PÁGINA DE ACTIVIDADES  */
 
 .actividad-card {
   transition: transform 0.3s ease, box-shadow 0.3s ease;

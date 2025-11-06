@@ -21,12 +21,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     emailjs.send(serviceID, templateID, params)
       .then(() => {
-        estado.innerText = "✅ ¡Mensaje enviado con éxito!";
+        estado.innerText = "¡Mensaje enviado con éxito!";
         form.reset();
       })
       .catch((err) => {
         console.error("Error al enviar:", err);
-        estado.innerText = "❌ Ocurrió un error. Inténtalo nuevamente.";
+        estado.innerText = "Ocurrió un error. Inténtalo nuevamente.";
       });
   });
 });

@@ -1,6 +1,6 @@
 @import url("variables.css");
 
-/* === PÁGINA DE INICIO === */
+/*  PÁGINA DE INICIO  */
 
 .hero {
   background: linear-gradient(135deg, var(--color-acento), var(--color-primario));
@@ -27,7 +27,7 @@
   color: #fffde7;
 }
 
-/* === SECCIÓN DE BENEFICIOS === */
+/*  SECCIÓN DE BENEFICIOS  */
 .beneficios {
   padding: 3rem 1rem;
 }
@@ -46,7 +46,7 @@
   transform: scale(1.05);
 }
 
-/* === ACTIVIDADES DESTACADAS === */
+/*  ACTIVIDADES DESTACADAS  */
 .actividades-destacadas {
   background-color: #f9f9f9;
   padding: 3rem 1rem;
@@ -60,7 +60,7 @@
   transform: translateY(-5px);
 }
 
-/* === MENSAJE FINAL === */
+/*  MENSAJE FINAL  */
 .mensaje-final {
   background-color: var(--color-acento);
   color: white;

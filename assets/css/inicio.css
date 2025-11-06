@@ -1,9 +1,6 @@
 @import url("variables.css");
 
-/* =====================================
-   INICIO.CSS
-   Página principal o de bienvenida
-   ===================================== */
+/* Página principal  */
 
 body {
   background-color: var(--color-blanco);
@@ -11,7 +8,7 @@ body {
   font-family: var(--fuente-principal);
 }
 
-/* ---------- TÍTULOS ---------- */
+/*  TÍTULOS  */
 h1,
 h2,
 h3 {
@@ -21,7 +18,7 @@ h3 {
   margin-bottom: 1rem;
 }
 
-/* ---------- TARJETAS (CARDS) ---------- */
+/*  TARJETAS  */
 .card {
   border-radius: var(--radio-card);
   background-color: var(--color-blanco);
@@ -37,7 +34,7 @@ h3 {
   box-shadow: var(--sombra-flotante);
 }
 
-/* ---------- TEXTOS ---------- */
+/*  TEXTOS  */
 .text-primary {
   color: var(--color-secundario) !important;
 }
@@ -50,7 +47,7 @@ h3 {
   color: var(--color-acento) !important;
 }
 
-/* ---------- BOTONES ---------- */
+/*  BOTONES  */
 .btn {
   background-color: var(--color-secundario);
   color: var(--color-blanco);
@@ -67,7 +64,7 @@ h3 {
   transform: scale(1.05);
 }
 
-/* ---------- SECCIONES ---------- */
+/*  SECCIONES  */
 .section {
   padding: var(--espaciado-lg) var(--espaciado-md);
   text-align: center;
@@ -82,7 +79,7 @@ h3 {
   margin-bottom: 1.5rem;
 }
 
-/* ---------- HERO DE INICIO ---------- */
+/*  HERO DE INICIO  */
 .hero-inicio {
   background: linear-gradient(135deg, var(--color-primario), var(--color-secundario));
   color: var(--color-blanco);
@@ -105,7 +102,7 @@ h3 {
   margin-bottom: 20px;
 }
 
-/* ---------- ANIMACIONES ---------- */
+/*  ANIMACIONES  */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }

@@ -1,0 +1,129 @@
+/*  SECCIÓN PRINCIPAL CENTRADA  */
+#creditos-consola-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh; /* ocupa toda la pantalla */
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+  background: linear-gradient(
+    180deg,
+    rgba(38, 70, 83, 0.1) 0%,
+    rgba(42, 157, 143, 0.15) 100%
+  );
+
+  /* centrado absoluto */
+  position: relative;
+  text-align: center; /* para centrar el bloque hijo */
+}
+
+/*  BLOQUE CONSOLA (centrado) */
+#creditos-consola {
+  margin: 0 auto; /* fuerza centrado horizontal */
+  display: block;
+  background-color: rgba(12, 20, 18, 0.92);
+  color: #9effd0;
+  font-family: "Courier New", Courier, monospace;
+  font-size: clamp(0.75rem, 1vw + 0.4rem, 0.95rem);
+  line-height: 1.5;
+  padding: 1.8rem;
+  border: 1.8px solid var(--color-primario, #2a9d8f);
+  border-radius: 12px;
+  box-shadow:
+    0 0 25px rgba(42, 157, 143, 0.4),
+    inset 0 0 18px rgba(42, 157, 143, 0.25),
+    0 0 4px rgba(0, 0, 0, 0.5);
+  width: min(70%, 800px);
+  min-height: 420px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  white-space: pre-wrap; /* evita desbordes horizontales */
+  text-align: left; /* ← mantiene texto consola alineado */
+  position: relative;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(4px);
+}
+
+/* Contenedor interno para centrar el bloque de texto */
+#creditos-consola .texto-consola {
+  display: flex;
+  justify-content: center;   /* centra horizontalmente el bloque */
+  align-items: center;       /* centra verticalmente */
+  flex-direction: column;    /* organiza el texto de arriba a abajo */
+  width: 100%;
+  min-height: 100%;
+}
+
+/* El texto en sí sigue alineado a la izquierda */
+#creditos-consola pre,
+#creditos-consola .lineas-consola {
+  text-align: left;
+  width: 100%;
+}
+
+
+/*  EFECTOS DE PANTALLA Y CURSOR */
+#creditos-consola::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.03),
+    rgba(255, 255, 255, 0.02) 2px,
+    transparent 3px,
+    transparent 5px
+  );
+  pointer-events: none;
+}
+
+#creditos-consola::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  box-shadow: 0 0 8px rgba(42, 157, 143, 0.3);
+  pointer-events: none;
+}
+
+/* Cursor */
+.cursor {
+  display: inline-block;
+  width: 8px;
+  background-color: #9effd0;
+  animation: blink 0.8s steps(1) infinite;
+}
+@keyframes blink {
+  50% { background-color: transparent; }
+}
+
+/* Scrollbar personalizada */
+#creditos-consola::-webkit-scrollbar {
+  width: 8px;
+}
+#creditos-consola::-webkit-scrollbar-thumb {
+  background: rgba(42, 157, 143, 0.5);
+  border-radius: 4px;
+}
+#creditos-consola::-webkit-scrollbar-thumb:hover {
+  background: rgba(42, 157, 143, 0.8);
+}
+
+/*   RESPONSIVO  */
+@media (max-width: 768px) {
+  #creditos-consola {
+    width: 95%;
+    min-height: 350px;
+    font-size: clamp(0.7rem, 2.5vw, 0.85rem);
+    padding: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #creditos-consola {
+    font-size: clamp(0.65rem, 2vw, 0.8rem);
+    line-height: 1.3;
+    padding: 1rem;
+    border-width: 1.3px;
+  }
+}

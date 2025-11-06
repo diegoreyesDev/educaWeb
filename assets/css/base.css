@@ -1,6 +1,6 @@
 @import url("variables.css");
 
-/* === ESTILOS BASE === */
+/*  ESTILOS BASE  */
 
 body {
   font-family: var(--fuente-principal);
@@ -27,7 +27,7 @@ a:hover {
   color: var(--color-secundario);
 }
 
-/* === BOTONES === */
+/*  BOTONES  */
 .btn {
   background-color: var(--color-primario);
   color: #fff;
@@ -42,7 +42,7 @@ a:hover {
   background-color: var(--color-acento);
 }
 
-/* === TARJETAS === */
+/*  TARJETAS  */
 .card {
   border-radius: var(--radio);
   box-shadow: var(--sombra-base);
@@ -53,7 +53,7 @@ a:hover {
   transform: translateY(-4px);
 }
 
-/* === FOOTER === */
+/*  FOOTER  */
 footer {
   background-color: var(--color-footer);
   color: #f2f2f2;
@@ -74,5 +74,5 @@ footer a {
 footer a:hover {
   color: #ffffff; /* O un tono más claro del secundario */
 }
-/* === FOOTER === */
+/*  FOOTER  */
 

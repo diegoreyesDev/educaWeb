@@ -1,4 +1,4 @@
-// modulo-explicaciones-psicopedagogico.js - VERSIÓN MEJORADA
+// modulo-explicaciones-psicopedagogico
 class ModuloExplicaciones {
   generarAnalisisEstructural(expresion) {
     return {
@@ -10,7 +10,7 @@ class ModuloExplicaciones {
                     ${this.generarDesgloseAccesible(expresion)}
                     
                     <div class="estrategia-aprendizaje mt-3 p-3 bg-light rounded">
-                        <strong>💡 Estrategia para comenzar:</strong>
+                        <strong>Estrategia para comenzar:</strong>
                         <p class="mb-0">Antes de resolver, <em>siempre observa toda la expresión</em>. Identifica qué tipos de operaciones contiene y en qué orden deben resolverse.</p>
                     </div>
                 </div>
@@ -32,7 +32,7 @@ class ModuloExplicaciones {
                 <div class="row">
                     <div class="col-md-6 mb-2">
                         <div class="d-flex align-items-center p-2 bg-primary bg-opacity-10 rounded">
-                            <div class="me-3">🔢</div>
+                            <div class="me-3"></div>
                             <div>
                                 <strong>${
                                   componentes.numeros
@@ -43,7 +43,7 @@ class ModuloExplicaciones {
                     </div>
                     <div class="col-md-6 mb-2">
                         <div class="d-flex align-items-center p-2 bg-success bg-opacity-10 rounded">
-                            <div class="me-3">⚡</div>
+                            <div class="me-3"></div>
                             <div>
                                 <strong>${
                                   componentes.operadores
@@ -57,7 +57,7 @@ class ModuloExplicaciones {
                         ? `
                     <div class="col-md-6 mb-2">
                         <div class="d-flex align-items-center p-2 bg-warning bg-opacity-10 rounded">
-                            <div class="me-3">📦</div>
+                            <div class="me-3"></div>
                             <div>
                                 <strong>${componentes.parentesis} paréntesis</strong><br>
                                 <small>Grupos que se resuelven primero</small>
@@ -72,7 +72,7 @@ class ModuloExplicaciones {
                         ? `
                     <div class="col-md-6 mb-2">
                         <div class="d-flex align-items-center p-2 bg-info bg-opacity-10 rounded">
-                            <div class="me-3">🚀</div>
+                            <div class="me-3"></div>
                             <div>
                                 <strong>${componentes.potencias} potencias</strong><br>
                                 <small>Multiplicaciones repetidas</small>
@@ -89,7 +89,7 @@ class ModuloExplicaciones {
 
   generarDescomposicionTerminos(terminos, expresionOriginal) {
     return {
-      titulo: "📝 Dividir en Partes Más Pequeñas",
+      titulo: "Dividir en Partes Más Pequeñas",
       contenido: `
                 <div class="descomposicion-accesible">
                     <h6>Paso 2: Fragmentar el problema</h6>
@@ -120,7 +120,7 @@ class ModuloExplicaciones {
                     </div>
                     
                     <div class="explicacion-estrategica mt-3 p-3 bg-success bg-opacity-10 rounded">
-                        <strong>🎯 Estrategia psicopedagógica:</strong>
+                        <strong>Estrategia psicopedagógica:</strong>
                         <p class="mb-2"><em>"Dividir problemas grandes en partes pequeñas hace que sean más manejables."</em></p>
                         <p class="mb-0">Esta técnica te ayuda a no sentirte abrumado por expresiones complejas.</p>
                     </div>
@@ -139,13 +139,13 @@ class ModuloExplicaciones {
                 <div class="proceso-visual mb-3 p-3 bg-light rounded">
                     <div class="d-flex align-items-center justify-content-around">
                         <div class="text-center">
-                            <div class="fs-4">📦</div>
+                            <div class="fs-4"></div>
                             <div><strong>Grupo</strong></div>
                             <div class="text-muted">${contenido}</div>
                         </div>
                         <div class="fs-2">→</div>
                         <div class="text-center">
-                            <div class="fs-4">✅</div>
+                            <div class="fs-4"></div>
                             <div><strong>Resultado</strong></div>
                             <div class="text-success">${resultado}</div>
                         </div>
@@ -153,7 +153,7 @@ class ModuloExplicaciones {
                 </div>
                 
                 <div class="analogia-psicopedagogica p-3 bg-info bg-opacity-10 rounded">
-                    <strong>💭 Piensa así:</strong>
+                    <strong>Piensa así:</strong>
                     <p class="mb-0">"Los paréntesis son como paquetes que debemos desenvolver antes de usar lo que hay dentro."</p>
                 </div>
             </div>
@@ -186,7 +186,7 @@ class ModuloExplicaciones {
                 </div>
                 
                 <div class="estrategia-memoria p-3 bg-success bg-opacity-10 rounded">
-                    <strong>🧠 Para recordar mejor:</strong>
+                    <strong>Para recordar mejor:</strong>
                     <p class="mb-0">"La potencia es como un atajo: en lugar de escribir la multiplicación muchas veces, usamos un número pequeño arriba que nos dice cuántas veces multiplicar."</p>
                 </div>
             </div>
@@ -211,7 +211,7 @@ class ModuloExplicaciones {
             </div>
             
             <div class="estrategia-memoria p-3 bg-success bg-opacity-10 rounded">
-                <strong>🧠 Para recordar mejor:</strong>
+                <strong>Para recordar mejor:</strong>
                 <p class="mb-0">"La raíz cuadrada es la operación inversa de elevar al cuadrado. Si ${resultado}² = ${contenido}, entonces √${contenido} = ${resultado}."</p>
             </div>
         </div>
@@ -253,7 +253,7 @@ class ModuloExplicaciones {
                 </div>
                 
                 <div class="refuerzo-positivo mt-3 p-3 bg-success text-white rounded">
-                    <strong>¡Bien hecho! 👏</strong>
+                    <strong>¡Bien hecho!</strong>
                     <p class="mb-0">Has comprendido cómo ${
                       operador === "×"
                         ? "combinar grupos"
@@ -282,7 +282,7 @@ class ModuloExplicaciones {
                 } nos permite ${concepto}.</p>
                 
                 <div class="analogia-concreta mb-3 p-3 bg-warning bg-opacity-10 rounded">
-                    <strong>📚 Situación de la vida real:</strong>
+                    <strong>Situación de la vida real:</strong>
                     <p class="mb-0">${this.generarEjemploReal(
                       izquierda,
                       derecha,
@@ -316,7 +316,7 @@ class ModuloExplicaciones {
                 </div>
                 
                 <div class="confianza-matematica p-3 bg-info bg-opacity-10 rounded">
-                    <strong>💪 Construyendo confianza:</strong>
+                    <strong>Construyendo confianza:</strong>
                     <p class="mb-0">Cada operación que resuelves correctamente fortalece tu comprensión matemática. ¡Sigue practicando!</p>
                 </div>
             </div>
@@ -325,7 +325,7 @@ class ModuloExplicaciones {
 
   generarConclusionPedagogica(expresionOriginal, resultado) {
     return {
-      titulo: "🎉 ¡Proceso Completado!",
+      titulo: "¡Proceso Completado!",
       contenido: `
                 <div class="conclusion-psicopedagogica">
                     <div class="logro-final mb-4 p-4 bg-gradient-success text-white rounded text-center">
@@ -334,7 +334,7 @@ class ModuloExplicaciones {
                     </div>
                     
                     <div class="resumen-metodologico mb-4 p-3 bg-light rounded">
-                        <h6>📊 Resumen de la estrategia aplicada:</h6>
+                        <h6>Resumen de la estrategia aplicada:</h6>
                         <div class="row">
                             <div class="col-md-6">
                                 <ul class="mb-0">
@@ -352,7 +352,7 @@ class ModuloExplicaciones {
                     </div>
                     
                     <div class="desarrollo-habilidades mb-4 p-3 bg-primary bg-opacity-10 rounded">
-                        <h6>🧩 Habilidades que has desarrollado:</h6>
+                        <h6>Habilidades que has desarrollado:</h6>
                         <div class="d-flex flex-wrap gap-2">
                             <span class="badge bg-success">Pensamiento lógico</span>
                             <span class="badge bg-info">Resolución de problemas</span>
@@ -362,14 +362,14 @@ class ModuloExplicaciones {
                     </div>
                     
                     <div class="mensaje-motivacional p-3 bg-warning bg-opacity-20 rounded">
-                        <h6>🌟 Mensaje de tu asistente matemático:</h6>
+                        <h6>Mensaje de tu asistente matemático:</h6>
                         <p class="mb-2"><em>"Las matemáticas no son sobre ser rápido, sino sobre entender profundamente. Cada problema que resuelves construye tu confianza y capacidad para enfrentar desafíos más complejos."</em></p>
                         <p class="mb-0"><strong>Siguiente paso:</strong> Intenta con una expresión un poco más compleja. ¡Tú puedes!</p>
                     </div>
 
                     <div class="mt-4 text-center">
                         <button class="btn btn-success btn-lg" onclick="window.analizador.reiniciarAnalisis()">
-                            🧮 Probar Otra Expresión
+                            Probar Otra Expresión
                         </button>
                     </div>
                 </div>

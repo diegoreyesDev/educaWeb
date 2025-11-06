@@ -1,4 +1,4 @@
-// modulo-utilidades.js
+// modulo-utilidades
 class ModuloUtilidades {
     prepararInterfaz() {
         const vistaInicial = document.getElementById('vista-inicial');

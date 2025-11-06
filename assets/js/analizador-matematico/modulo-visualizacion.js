@@ -1,7 +1,7 @@
-// modulo-visualizacion.js - VERSIÓN MEJORADA Y COMPLETA
+// modulo-visualizacion
 class ModuloVisualizacion {
     mostrarAnalisis(pasos, expresionOriginal) {
-        console.log('🎨 Mostrando análisis con', pasos.length, 'pasos');
+        console.log('Mostrando análisis con', pasos.length, 'pasos');
         const contenedor = document.getElementById('analisis-dinamico');
         if (!contenedor) {
             console.error('❌ No se encontró el contenedor de análisis');
@@ -15,7 +15,7 @@ class ModuloVisualizacion {
             estadoAnalisis.textContent = 'Análisis completado';
         }
         
-        console.log('✅ Análisis visualizado correctamente');
+        console.log('Análisis visualizado correctamente');
     }
 
     generarInterfazAnalisis(pasos, expresionOriginal) {
@@ -23,7 +23,7 @@ class ModuloVisualizacion {
             <div class="analisis-container">
                 <div class="card mb-4">
                     <div class="card-header bg-primary text-white">
-                        <h5 class="mb-0">🧮 Análisis Psicopedagógico</h5>
+                        <h5 class="mb-0">Análisis Psicopedagógico</h5>
                     </div>
                     <div class="card-body">
                         <div class="expresion-original text-center mb-3">
@@ -124,7 +124,7 @@ class ModuloVisualizacion {
     generarTransicionExpresion(paso) {
         return `
             <div class="transicion-expresion mt-3 p-3 bg-light rounded">
-                <h6>🔄 Progreso de la Expresión</h6>
+                <h6>Progreso de la Expresión</h6>
                 <div class="row align-items-center">
                     <div class="col-md-5">
                         <div class="expresion-anterior">
@@ -155,7 +155,7 @@ class ModuloVisualizacion {
         return `
             <div class="operacion-destacada mt-3 p-3 bg-primary text-white rounded">
                 <div class="d-flex align-items-center">
-                    <div class="me-3">📝</div>
+                    <div class="me-3"></div>
                     <div>
                         <strong>Operación realizada:</strong>
                         <div class="fs-5 mt-1">${operacion}</div>
@@ -166,7 +166,7 @@ class ModuloVisualizacion {
     }
 
     actualizarVistaPasos(pasoActual) {
-        console.log('🔄 Actualizando vista al paso:', pasoActual + 1);
+        console.log('Actualizando vista al paso:', pasoActual + 1);
         const pasos = document.querySelectorAll('.paso-analisis');
         
         pasos.forEach((paso, index) => {
@@ -225,7 +225,7 @@ class ModuloVisualizacion {
                             <p class="mb-2">${mensaje}</p>
                             <div class="mt-3">
                                 <button class="btn btn-warning me-2" onclick="window.analizador.reiniciarAnalisis()">
-                                    🔄 Intentar de Nuevo
+                                    Intentar de Nuevo
                                 </button>
                                 <button class="btn btn-outline-secondary" onclick="this.parentElement.parentElement.parentElement.style.display='none'">
                                     Cerrar
@@ -237,7 +237,7 @@ class ModuloVisualizacion {
                 
                 <div class="card mt-3">
                     <div class="card-body">
-                        <h6>💡 Sugerencias:</h6>
+                        <h6>Sugerencias:</h6>
                         <ul>
                             <li>Verifica que la expresión esté bien escrita</li>
                             <li>Asegúrate de que los paréntesis estén balanceados</li>

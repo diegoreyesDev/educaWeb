@@ -1,4 +1,4 @@
-// analisis-principal.js - VERSIÓN CORREGIDA
+// analisis-principal.js 
 class AnalizadorMatematico {
     constructor() {
         console.log('🔧 Constructor AnalizadorMatematico llamado');
@@ -96,7 +96,7 @@ class AnalizadorMatematico {
                 throw new Error('Analizador no está disponible');
             }
 
-            // Usar el analizador - CORREGIDO: usar this.analizador, no this.analizadorBaldor
+            // Usar el analizador - usar this.analizador, no this.analizadorBaldor
             this.pasos = this.analizador.analizarExpresionCompleta(expresion);
             
             // Verificar que tenemos pasos para mostrar
@@ -104,7 +104,7 @@ class AnalizadorMatematico {
                 throw new Error('No se generaron pasos de análisis');
             }
 
-            // Mostrar el análisis - CORREGIDO: usar método genérico
+            // Mostrar el análisis -  usar método genérico
             if (this.visualizador && this.visualizador.mostrarAnalisis) {
                 this.visualizador.mostrarAnalisis(this.pasos, this.expresionOriginal);
             } else {

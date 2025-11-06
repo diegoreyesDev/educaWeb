@@ -1,23 +1,23 @@
 // main.js - VERSIÓN COMPLETAMENTE CORREGIDA
 class SistemaEducaWeb {
     constructor() {
-        console.log('🚀 Iniciando Sistema EducaWeb...');
+        console.log('Iniciando Sistema EducaWeb...');
         this.calculadora = null;
         this.analizador = null;
         this.inicializarSistema();
     }
 
     async inicializarSistema() {
-        console.log('🔧 Inicializando sistema...');
+        console.log('Inicializando sistema...');
         await this.cargarComponentes();
         this.inicializarModulos();
         this.inicializarEventosGlobales();
-        console.log('✅ Sistema EducaWeb inicializado correctamente');
+        console.log('Sistema EducaWeb inicializado correctamente');
     }
 
     async cargarComponentes() {
         try {
-            console.log('📦 Cargando componentes...');
+            console.log('Cargando componentes...');
             const [headerData, footerData] = await Promise.all([
                 this.cargarComponente('components/header.html'),
                 this.cargarComponente('components/footer.html')
@@ -25,15 +25,15 @@ class SistemaEducaWeb {
 
             if (headerData) {
                 document.getElementById('header').innerHTML = headerData;
-                console.log('✅ Header cargado');
+                console.log('Header cargado');
             }
             if (footerData) {
                 document.getElementById('footer').innerHTML = footerData;
-                console.log('✅ Footer cargado');
+                console.log('Footer cargado');
             }
 
         } catch (error) {
-            console.warn('⚠️ Algunos componentes no se cargaron:', error.message);
+            console.warn('Algunos componentes no se cargaron:', error.message);
         }
     }
 
@@ -53,7 +53,7 @@ class SistemaEducaWeb {
         const displayMatematico = document.getElementById('display-matematico');
         
         if (displayMatematico) {
-            console.log('🎯 Página de canva matemático detectada');
+            console.log('Página de canva matemático detectada');
             
             // 1. Inicializar CALCULADORA PRIMERO
             try {
@@ -63,21 +63,21 @@ class SistemaEducaWeb {
                     if (this.calculadora.inicializar) {
                         this.calculadora.inicializar();
                     } else {
-                        console.warn('⚠️ Calculadora no tiene método inicializar');
+                        console.warn('Calculadora no tiene método inicializar');
                         // Fallback: llamar a inicializarCalculadora si existe
                         if (this.calculadora.inicializarCalculadora) {
                             this.calculadora.inicializarCalculadora();
                         }
                     }
-                    console.log('✅ Calculadora científica inicializada');
+                    console.log('Calculadora científica inicializada');
                     
                     // Hacer disponible globalmente
                     window.calculadora = this.calculadora;
                 } else {
-                    console.error('❌ Clase CalculadoraCientifica no encontrada');
+                    console.error('Clase CalculadoraCientifica no encontrada');
                 }
             } catch (error) {
-                console.error('❌ Error inicializando calculadora:', error);
+                console.error('Error inicializando calculadora:', error);
             }
 
             // 2. Inicializar ANALIZADOR DESPUÉS
@@ -88,28 +88,28 @@ class SistemaEducaWeb {
                     
                     // HACER GLOBAL EL ANALIZADOR - ¡ESTO ES CRÍTICO!
                     window.analizador = this.analizador;
-                    console.log('✅ Analizador disponible como window.analizador');
+                    console.log('Analizador disponible como window.analizador');
                 } else {
-                    console.error('❌ Clase AnalizadorMatematico no encontrada');
+                    console.error('Clase AnalizadorMatematico no encontrada');
                 }
             } catch (error) {
-                console.error('❌ Error inicializando analizador:', error);
+                console.error('Error inicializando analizador:', error);
             }
         } else {
-            console.log('ℹ️  No es la página del canva matemático, omitiendo módulos matemáticos');
+            console.log('No es la página del canva matemático, omitiendo módulos matemáticos');
         }
     }
 
     inicializarEventosGlobales() {
-        console.log('🔔 Inicializando eventos globales...');
+        console.log('Inicializando eventos globales...');
         
         // Evento para debug - mostrar estado del sistema
         document.addEventListener('sistemaListo', () => {
-            console.log('🎉 Evento sistemaListo disparado');
-            console.log('📊 Estado del sistema:');
-            console.log('  - Calculadora:', this.calculadora ? '✅ Inicializada' : '❌ No inicializada');
-            console.log('  - Analizador:', this.analizador ? '✅ Inicializada' : '❌ No inicializada');
-            console.log('  - window.analizador:', window.analizador ? '✅ Disponible' : '❌ No disponible');
+            console.log('Evento sistemaListo disparado');
+            console.log('Estado del sistema:');
+            console.log('  - Calculadora:', this.calculadora ? 'Inicializada' : 'No inicializada');
+            console.log('  - Analizador:', this.analizador ? 'Inicializada' : 'No inicializada');
+            console.log('  - window.analizador:', window.analizador ? 'Disponible' : 'No disponible');
         });
 
         // Disparar evento de sistema listo
@@ -124,15 +124,15 @@ class SistemaEducaWeb {
             document.dispatchEvent(evento);
         }, 1000);
 
-        console.log('✅ Eventos globales inicializados');
+        console.log('Eventos globales inicializados');
     }
 }
 
 // INICIALIZACIÓN ROBUSTA
-console.log('🔍 Script main.js cargado, esperando DOM...');
+console.log('Script main.js cargado, esperando DOM...');
 
 // Verificar que todos los módulos están cargados
-console.log('📋 VERIFICACIÓN DE MÓDULOS EN main.js:');
+console.log('VERIFICACIÓN DE MÓDULOS EN main.js:');
 console.log('  - CalculadoraCientifica:', typeof CalculadoraCientifica);
 console.log('  - AnalizadorMatematico:', typeof AnalizadorMatematico);
 console.log('  - AnalizadorBaldor:', typeof AnalizadorBaldor);
@@ -145,7 +145,7 @@ if (document.readyState === 'loading') {
     });
 } else {
     // DOM ya está listo
-    console.log('⚡ DOM ya está listo, iniciando sistema inmediatamente...');
+    console.log('DOM ya está listo, iniciando sistema inmediatamente...');
     window.app = new SistemaEducaWeb();
 }
 

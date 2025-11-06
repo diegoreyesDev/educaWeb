@@ -1,28 +1,114 @@
-@import url("variables.css");
-
-/* === PÁGINA DE CONTACTO === */
-
-form {
-  max-width: 600px;
-  margin: 2rem auto;
+/* Fondo y estructura */
+.contacto-wrapper {
+  background: linear-gradient(180deg, #f8fafb 0%, #ffffff 100%);
+  border-radius: 16px;
+  padding: 3rem 2rem;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.04);
 }
 
-form input,
-form textarea {
-  border-radius: var(--radio);
-  border: 2px solid var(--color-acento);
-  padding: 0.75rem;
+/* Encabezado */
+.contacto-header .titulo-seccion {
+  font-size: clamp(1.8rem, 2vw + 1rem, 2.4rem);
+  color: var(--color-primario, #2a9d8f);
+  letter-spacing: 0.5px;
+  margin-bottom: 1rem;
 }
 
-form input:focus,
-form textarea:focus {
-  border-color: var(--color-primario);
-  box-shadow: 0 0 0 0.2rem rgba(255, 0, 128, 0.2);
+.contacto-header .descripcion {
+  color: #5a5a5a;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  max-width: 650px;
 }
 
-#estadoEnvio {
-  font-size: 0.9rem;
-  margin-top: 1rem;
-  text-align: center;
-  color: var(--color-acento);
+/* Tarjetas */
+.contact-card {
+  background-color: #ffffff;
+  border: 1px solid rgba(42, 157, 143, 0.15);
+  border-radius: 14px;
+  padding: 2rem 1.5rem;
+  transition: all 0.3s ease;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(42, 157, 143, 0.05);
+}
+
+.contact-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background-color: var(--color-primario, #2a9d8f);
+  transition: width 0.4s ease;
+}
+
+.contact-card:hover::before {
+  width: 100%;
+}
+
+.contact-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 28px rgba(42, 157, 143, 0.12);
+}
+
+/* Iconos */
+.contact-card .icono {
+  font-size: 2.8rem;
+  color: var(--color-primario, #2a9d8f);
+  margin-bottom: 1rem;
+  transition: color 0.3s ease;
+}
+
+.contact-card:hover .icono {
+  color: var(--color-secundario, #e9c46a);
+}
+
+/* Título */
+.contact-card .card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #264653;
+  margin-bottom: 0.5rem;
+}
+
+/* Texto */
+.contact-card .card-text {
+  font-size: 0.95rem;
+  color: #4f4f4f;
+  margin: 0;
+}
+
+.contact-card .card-text a {
+  color: var(--color-primario, #2a9d8f);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.contact-card .card-text a:hover {
+  color: var(--color-acento, #f4a261);
+  text-decoration: underline;
+}
+
+.contact-card .frase {
+  font-style: italic;
+  color: #5b5b5b;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .contacto-wrapper {
+    padding: 2rem 1rem;
+  }
+
+  .contact-card {
+    padding: 1.6rem;
+  }
+
+  .contact-card .icono {
+    font-size: 2.2rem;
+  }
 }

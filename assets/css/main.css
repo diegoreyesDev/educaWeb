@@ -1,9 +1,6 @@
 @import url("variables.css");
 
-/* =====================================
-   MAIN.CSS
-   Estructura principal del sitio
-   ===================================== */
+/*  Estructura principal del sitio */
 
 body {
   font-family: var(--fuente-principal);
@@ -12,7 +9,7 @@ body {
   line-height: 1.6;
 }
 
-/* ---------- HERO PRINCIPAL ---------- */
+/*  HERO PRINCIPAL  */
 .hero {
   background: linear-gradient(
       rgba(49, 170, 193, 0.5),
@@ -43,7 +40,7 @@ body {
   margin: 0 auto 2rem auto;
 }
 
-/* ---------- BOTÓN HERO ---------- */
+/*  BOTÓN HERO  */
 .btn-hero {
   background-color: var(--color-secundario);
   color: var(--color-blanco);
@@ -60,7 +57,7 @@ body {
   transform: scale(1.05);
 }
 
-/* ---------- ICONOS ---------- */
+/*  ICONOS  */
 .icon {
   width: 70px;
   height: 70px;
@@ -68,7 +65,7 @@ body {
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 
-/* ---------- SECCIÓN CTA ---------- */
+/*  SECCIÓN CTA  */
 .cta {
   background-color: var(--color-primario);
   color: var(--color-blanco);
@@ -96,7 +93,6 @@ body {
   color: var(--color-blanco);
 }
 
-/* ---------- FOOTER ---------- */
 footer {
   background-color: #023047;
   color: var(--color-blanco);
@@ -116,8 +112,43 @@ footer a:hover {
   text-decoration: underline;
 }
 
-footer p{
+footer p {
   color: #e8e8e8;
+  margin: 0.3rem 0;
+  font-size: 0.95rem;
+}
+
+/* Información profesional */
+.footer-info a {
+  margin: 0 0.3rem;
+}
+
+/* Logo institucional */
+.footer-logo {
+  margin-top: 0.75rem;
+}
+
+.footer-logo img {
+  height: 40px;
+  max-width: 180px;
+  object-fit: contain;
+  opacity: 0.85;
+  transition: opacity 0.3s ease;
+}
+
+.footer-logo img:hover {
+  opacity: 1;
+}
+
+/* Responsivo para pantallas pequeñas */
+@media (max-width: 480px) {
+  .footer-logo img {
+    height: 32px;
+    max-width: 140px;
+  }
+  footer p {
+    font-size: 0.85rem;
+  }
 }
 
 /* ---------- FORMULARIOS (CONTACTO) ---------- */

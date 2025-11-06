@@ -1,6 +1,6 @@
 @import url("variables.css");
 
-/* === PÁGINA QUIÉNES SOMOS === */
+/*  PÁGINA QUIÉNES SOMOS  */
 
 .quienes-somos-intro {
   gap: 2rem;
@@ -114,29 +114,5 @@
 
 .equipo-banner:hover .equipo-overlay {
   opacity: 1;
-}
-
-/* Tarjetas de integrantes */
-.equipo-card {
-  border-radius: var(--radio);
-  transition: var(--transicion-base);
-  background-color: #fff;
-}
-
-.equipo-card:hover {
-  transform: translateY(-6px);
-  background-color: var(--color-primario);
-  color: white;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-}
-
-.equipo-card:hover .text-muted {
-  color: #fff !important;
-}
-
-/* Pequeña animación al cargar */
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
 }
 
