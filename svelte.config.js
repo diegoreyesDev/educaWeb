@@ -16,6 +16,9 @@ const config = {
       handleHttpError: 'warn',
       handleMissingId: 'warn'
     },
+    paths: {
+      base: '/educaWeb'
+    },
     alias: {
       '$lib': './src/lib',
       '$components': './src/lib/components',

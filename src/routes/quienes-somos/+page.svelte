@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { base } from '$app/paths';
   import { teamData } from '$lib/data/team';
   import CreditsConsole from '$lib/components/CreditsConsole.svelte';
 </script>
@@ -28,7 +29,7 @@
         <!-- Imagen IPCHILE -->
         <div class="flex-shrink-0">
           <img
-            src="/img/republica-1024x573-2.png"
+            src="{base}/img/republica-1024x573-2.png"
             alt="Instituto Profesional IPCHILE"
             class="w-full max-w-md rounded-xl shadow-lg transition-transform duration-300 hover:scale-[1.03] hover:shadow-xl"
           />
@@ -68,7 +69,7 @@
       <!-- Foto grupal con overlay al hover -->
       <div class="group relative mx-auto mb-8 max-w-4xl overflow-hidden rounded-xl shadow-lg">
         <img
-          src="/img/img-grupo/equipo.jpeg"
+          src="{base}/img/img-grupo/equipo.jpeg"
           alt="Equipo IPCHILE — Estudiantes de 2° año de Psicopedagogía"
           class="w-full object-cover transition-transform duration-[6s] group-hover:scale-105"
         />

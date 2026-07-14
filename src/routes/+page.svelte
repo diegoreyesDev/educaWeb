@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { base } from '$app/paths';
   import activities from '$lib/data/activities';
   import { NIVELES, ASIGNATURAS } from '$lib/types';
 
@@ -22,7 +23,7 @@
 <section class="relative flex min-h-[85vh] items-center justify-center overflow-hidden px-4 py-24">
   <!-- Imagen de fondo: preservada del proyecto original -->
   <img
-    src="/img/img-grupo/hero-psp.jpeg"
+    src="{base}/img/img-grupo/hero-psp.jpeg"
     alt="Estudiantes de Psicopedagogía IPCHILE"
     class="absolute inset-0 h-full w-full object-cover object-center"
     loading="eager"
@@ -44,7 +45,7 @@
       Un espacio creado por estudiantes de Psicopedagogía para apoyar el aprendizaje con actividades interactivas y recursos didácticos.
     </p>
     <a
-      href="/actividades"
+      href="{base}/actividades"
       class="btn-primary inline-flex animate-slide-up items-center gap-2 bg-white px-8 py-4 text-primary-700 shadow-xl shadow-primary-900/30 transition-all hover:bg-primary-50 hover:shadow-2xl"
     >
       Explorar Actividades
@@ -104,7 +105,7 @@
 <section class="bg-primary-900 py-16 sm:py-20">
   <div class="container-page text-center">
     <h2 class="mb-6 text-2xl font-bold text-white sm:text-3xl">¡Explora, aprende y diviértete con nuestras actividades interactivas!</h2>
-    <a href="/actividades" class="btn-outline inline-flex items-center gap-2 border-white text-white hover:bg-white hover:text-primary-700 px-8 py-4">
+    <a href="{base}/actividades" class="btn-outline inline-flex items-center gap-2 border-white text-white hover:bg-white hover:text-primary-700 px-8 py-4">
       Ver Actividades
       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
         <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />

@@ -1,11 +1,12 @@
 <script lang="ts">
+  import { base } from '$app/paths';
 </script>
 
 <footer class="bg-gray-900 text-white">
   <div class="container-page py-8">
     <div class="flex flex-col items-center gap-4 text-center">
       <img
-        src="/img/logo_ipchile2-blanco.png"
+        src="{base}/img/logo_ipchile2-blanco.png"
         alt="IPCHILE Logo"
         class="h-10 w-auto"
       />

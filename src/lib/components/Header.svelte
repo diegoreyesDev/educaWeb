@@ -1,14 +1,15 @@
 <script lang="ts">
   import { page } from '$app/stores';
+  import { base } from '$app/paths';
 
   let mobileOpen = $state(false);
 
   const navLinks = [
-    { href: '/', label: 'Inicio' },
-    { href: '/actividades', label: 'Actividades' },
-    { href: '/canva-matematico', label: 'GHOST-MATH' },
-    { href: '/quienes-somos', label: 'Quiénes Somos' },
-    { href: '/contacto', label: 'Contacto' }
+    { href: base + '/', label: 'Inicio' },
+    { href: base + '/actividades', label: 'Actividades' },
+    { href: base + '/canva-matematico', label: 'GHOST-MATH' },
+    { href: base + '/quienes-somos', label: 'Quiénes Somos' },
+    { href: base + '/contacto', label: 'Contacto' }
   ];
 
   function toggleMobile() {
@@ -34,9 +35,9 @@
 <header class="sticky top-0 z-50 bg-white shadow-sm">
   <div class="container-page">
     <nav class="flex h-16 items-center justify-between">
-      <a href="/" class="flex items-center gap-3" aria-label="Ir al inicio">
+      <a href={base + '/'} class="flex items-center gap-3" aria-label="Ir al inicio">
         <img
-          src="/img/LOGO-VINCULACION1.png"
+          src="{base}/img/LOGO-VINCULACION1.png"
           alt="Logo Click y Aprende"
           class="h-10 w-auto"
           style="max-width: 150px;"
