@@ -132,32 +132,101 @@
   });
 
   function handlePrint() {
-    const container = document.getElementById('analysis-results-print');
-    if (!container) return;
-    const win = window.open('', '_blank');
-    if (win) {
-      win.document.write(`
-        <html>
-          <head>
-            <title>Análisis GHOST-MATH — ${calculadora.expression}</title>
-            <script src="https://cdn.tailwindcss.com"><\\/script>
-            <style>
-              body { font-family: 'Inter', system-ui, sans-serif; }
-              @media print {
-                .step-card { break-inside: avoid; }
-              }
-            </style>
-          </head>
-          <body class="bg-gray-50 p-8">
-            <h1 class="mb-4 text-2xl font-bold text-gray-900">GHOST-MATH — Análisis de Razonamiento</h1>
-            <p class="mb-6 text-gray-600">Expresión: <span class="font-mono font-semibold">${calculadora.expression}</span> = <span class="font-bold text-emerald-600">${conclusionStep?.valorCalculado ?? '—'}</span></p>
-            <div class="space-y-4">${container.innerHTML}</div>
-          </body>
-        </html>
-      `);
-      win.document.close();
-      setTimeout(() => win.print(), 500);
+    if (analysisResults.length === 0) return;
+
+    const expr = calculadora.expression;
+    const finalResult = conclusionStep?.valorCalculado;
+    const badges: Record<string, string> = {
+      estructural: 'ESTRUCTURA',
+      resolucion: 'RESOLUCIÓN',
+      conclusion: 'CONCLUSIÓN'
+    };
+
+    // Build each step as clean HTML
+    const stepsHtml = analysisResults.map((step) => {
+      const badgeLabel = badges[step.tipo] ?? step.tipo.toUpperCase();
+      const badgeColor = step.tipo === 'conclusion' ? '#059669' : step.tipo === 'resolucion' ? '#d97706' : '#2563eb';
+      const borderColor = step.tipo === 'conclusion' ? '#059669' : step.tipo === 'resolucion' ? '#d97706' : '#2563eb';
+
+      let body = '';
+
+      // Expression transformation
+      body += `<div style="margin-bottom:8px;padding:8px 12px;background:#f8fafc;border-radius:6px;font-family:monospace;font-size:13px;">`;
+      body += `<div style="color:#64748b;margin-bottom:4px;"><strong>Expresión:</strong> ${escapeHtml(step.expresionAntes)}</div>`;
+      if (step.operacion) {
+        body += `<div style="color:#7c3aed;margin-bottom:4px;"><strong>Operación:</strong> ${escapeHtml(step.operacion)}</div>`;
+      }
+      body += `<div style="color:#0f172a;font-weight:600;"><strong>Resultante:</strong> ${escapeHtml(step.expresionDespues)}</div>`;
+      body += `</div>`;
+
+      // Calculated value highlight
+      if (step.valorCalculado !== undefined) {
+        body += `<div style="text-align:center;margin-bottom:8px;padding:8px;background:linear-gradient(135deg,#ede9fe,#e0e7ff);border-radius:6px;">`;
+        body += `<span style="font-size:22px;font-weight:700;color:#4c1d95;">= ${step.valorCalculado}</span>`;
+        body += `</div>`;
+      }
+
+      // Explanation
+      body += `<div style="padding:8px 12px;background:#f1f5f9;border-left:3px solid #94a3b8;border-radius:0 6px 6px 0;font-style:italic;color:#475569;font-size:13px;">`;
+      body += `"${escapeHtml(step.explicacion)}"`;
+      body += `</div>`;
+
+      return `
+        <div style="break-inside:avoid;margin-bottom:18px;padding:16px;background:#fff;border:1px solid #e2e8f0;border-left:4px solid ${borderColor};border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.06);">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+            <span style="display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:#1e293b;color:#fff;font-size:12px;font-weight:700;">${step.paso}</span>
+            <span style="display:inline-block;padding:2px 8px;border-radius:20px;background:${badgeColor}15;color:${badgeColor};font-size:10px;font-weight:700;letter-spacing:0.05em;">${badgeLabel}</span>
+            <span style="font-size:14px;font-weight:700;color:#1e293b;">${escapeHtml(step.titulo)}</span>
+          </div>
+          ${body}
+        </div>`;
+    }).join('');
+
+    const win = window.open('', '_blank', 'width=900,height=700');
+    if (!win) return;
+    win.document.write(`<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Análisis GHOST-MATH — ${escapeHtml(expr)}</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; color: #1e293b; padding: 32px 40px; max-width: 800px; margin: 0 auto; }
+    h1 { font-size: 24px; font-weight: 800; margin-bottom: 6px; background: linear-gradient(135deg, #4f46e5, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .expr-box { background: #f1f5f9; padding: 12px 16px; border-radius: 8px; margin-bottom: 6px; }
+    .expr-box code { font-size: 18px; font-weight: 600; color: #0f172a; }
+    .result { font-size: 28px; font-weight: 800; color: #059669; margin-top: 4px; }
+    .subtitle { color: #64748b; font-size: 13px; margin-bottom: 24px; }
+    @media print {
+      body { padding: 20px; }
+      @page { margin: 1.5cm; }
     }
+  </style>
+</head>
+<body>
+  <h1>GHOST-MATH — Análisis de Razonamiento</h1>
+  <div class="expr-box">
+    <div style="font-size:12px;color:#64748b;margin-bottom:4px;">EXPRESIÓN ANALIZADA</div>
+    <code>${escapeHtml(expr)}</code>
+    ${finalResult !== undefined ? `<div class="result">= ${finalResult}</div>` : ''}
+  </div>
+  <div class="subtitle">
+    ${analysisResults.length} paso${analysisResults.length !== 1 ? 's' : ''} 
+    · Método COPISI (Concreto, Pictórico, Simbólico)
+    · Motor GHOST-MATH v2.0
+  </div>
+  ${stepsHtml}
+  <div style="text-align:center;margin-top:24px;padding-top:16px;border-top:1px solid #e2e8f0;color:#94a3b8;font-size:11px;">
+    Generado por GHOST-MATH · Click y Aprende con la Psicopedagogía · IPCHILE
+  </div>
+</body>
+</html>`);
+    win.document.close();
+    setTimeout(() => win.print(), 400);
+  }
+
+  function escapeHtml(str: string): string {
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
 </script>
 
