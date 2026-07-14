@@ -1,0 +1,16 @@
+node_modules/
+dist/
+.svelte-kit/
+vite.config.ts.timestamp-*
+.env
+.env.*
+!.env.example
+*.local
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+coverage/
+test-results/
+playwright-report/
