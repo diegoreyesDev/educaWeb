@@ -17,7 +17,7 @@ La **versión 2.0.0** es una reconstrucción total del proyecto original (vanill
 | **URL producción** | `https://diegoreyesdev.github.io/educaWeb/` |
 | **Repositorio** | `https://github.com/diegoreyesDev/educaWeb` |
 | **Versión** | `2.0.0` |
-| **Rama predeterminada** | `doctrina-ghost-v4` |
+| **Rama predeterminada** | `main` |
 
 ---
 
