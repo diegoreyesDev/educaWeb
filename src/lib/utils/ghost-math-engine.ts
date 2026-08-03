@@ -1358,7 +1358,7 @@ function analyzeEquation(tokens: Token[]): AnalysisStep[] {
     titulo: 'Paso 1: Identificación',
     expresionAntes: tokensToString(tokens),
     expresionDespues: `${polyToString(leftPoly)} = ${polyToString(rightPoly)}`,
-    explicacion: \`Es una ecuación de grado \${degree}. El objetivo es encontrar el valor de la incógnita 'x' que hace que ambos lados sean iguales.\`,
+    explicacion: `Es una ecuación de grado ${degree}. El objetivo es encontrar el valor de la incógnita 'x' que hace que ambos lados sean iguales.`,
     tipo: 'estructural',
     operacion: 'Simplificación inicial'
   });
@@ -1372,17 +1372,17 @@ function analyzeEquation(tokens: Token[]): AnalysisStep[] {
     steps.push({
       paso: sc++,
       titulo: 'Paso 2: Agrupación de términos',
-      expresionAntes: \`\${polyToString(leftPoly)} = \${polyToString(rightPoly)}\`,
-      expresionDespues: \`\${polyToString([b, a])} = 0\`,
-      explicacion: \`Agrupamos todas las 'x' y los números en un solo lado. Para ello, usamos operaciones inversas en ambos lados. ¡Mantenemos el equilibrio de la balanza!\`,
+      expresionAntes: `${polyToString(leftPoly)} = ${polyToString(rightPoly)}`,
+      expresionDespues: `${polyToString([b, a])} = 0`,
+      explicacion: `Agrupamos todas las 'x' y los números en un solo lado. Para ello, usamos operaciones inversas en ambos lados. ¡Mantenemos el equilibrio de la balanza!`,
       tipo: 'resolucion'
     });
 
     if (Math.abs(a) < 1e-10) {
        if (Math.abs(b) < 1e-10) {
-         steps.push({ paso: sc++, titulo: 'Identidad', expresionAntes: \`\${b} = 0\`, expresionDespues: 'Infinitas soluciones', explicacion: 'Ambos lados son siempre iguales sin importar el valor de x. ¡Cualquier número real es solución!', tipo: 'conclusion' });
+         steps.push({ paso: sc++, titulo: 'Identidad', expresionAntes: `${b} = 0`, expresionDespues: 'Infinitas soluciones', explicacion: 'Ambos lados son siempre iguales sin importar el valor de x. ¡Cualquier número real es solución!', tipo: 'conclusion' });
        } else {
-         steps.push({ paso: sc++, titulo: 'Inconsistencia', expresionAntes: \`\${b} = 0\`, expresionDespues: 'Sin solución', explicacion: 'La igualdad es falsa. ¡No existe ningún número x que cumpla esta condición!', tipo: 'conclusion' });
+         steps.push({ paso: sc++, titulo: 'Inconsistencia', expresionAntes: `${b} = 0`, expresionDespues: 'Sin solución', explicacion: 'La igualdad es falsa. ¡No existe ningún número x que cumpla esta condición!', tipo: 'conclusion' });
        }
        return steps;
     }
@@ -1392,12 +1392,12 @@ function analyzeEquation(tokens: Token[]): AnalysisStep[] {
     steps.push({
       paso: sc++,
       titulo: 'Paso 3: Despejar la incógnita',
-      expresionAntes: \`\${polyToString([b, a])} = 0\`,
-      expresionDespues: \`x = \${fmtNum(xVal)}\`,
+      expresionAntes: `${polyToString([b, a])} = 0`,
+      expresionDespues: `x = ${fmtNum(xVal)}`,
       valorCalculado: xVal,
-      explicacion: \`Aislamos la 'x' pasando el \${fmtNum(b)} al otro lado con signo opuesto y dividiendo entre el coeficiente \${fmtNum(a)}.\`,
+      explicacion: `Aislamos la 'x' pasando el ${fmtNum(b)} al otro lado con signo opuesto y dividiendo entre el coeficiente ${fmtNum(a)}.`,
       tipo: 'conclusion',
-      operacion: \`x = \${fmtNum(-b)} / \${fmtNum(a)}\`
+      operacion: `x = ${fmtNum(-b)} / ${fmtNum(a)}`
     });
 
   } else if (degree === 2) {
@@ -1408,9 +1408,9 @@ function analyzeEquation(tokens: Token[]): AnalysisStep[] {
     steps.push({
       paso: sc++,
       titulo: 'Paso 2: Forma general (ax² + bx + c = 0)',
-      expresionAntes: \`\${polyToString(leftPoly)} = \${polyToString(rightPoly)}\`,
-      expresionDespues: \`\${polyToString([c, b, a])} = 0\`,
-      explicacion: \`Agrupamos todos los términos a la izquierda para igualar a cero. Identificamos: a=\${fmtNum(a)}, b=\${fmtNum(b)}, c=\${fmtNum(c)}.\`,
+      expresionAntes: `${polyToString(leftPoly)} = ${polyToString(rightPoly)}`,
+      expresionDespues: `${polyToString([c, b, a])} = 0`,
+      explicacion: `Agrupamos todos los términos a la izquierda para igualar a cero. Identificamos: a=${fmtNum(a)}, b=${fmtNum(b)}, c=${fmtNum(c)}.`,
       tipo: 'resolucion'
     });
 
@@ -1419,9 +1419,9 @@ function analyzeEquation(tokens: Token[]): AnalysisStep[] {
     steps.push({
       paso: sc++,
       titulo: 'Paso 3: El Discriminante (Δ)',
-      expresionAntes: \`Δ = b² - 4ac\`,
-      expresionDespues: \`Δ = \${fmtNum(discriminante)}\`,
-      explicacion: \`Calculamos el discriminante (\${fmtNum(b)}² - 4·\${fmtNum(a)}·\${fmtNum(c)}). Este valor determina cuántas soluciones tiene nuestra parábola.\`,
+      expresionAntes: `Δ = b² - 4ac`,
+      expresionDespues: `Δ = ${fmtNum(discriminante)}`,
+      explicacion: `Calculamos el discriminante (${fmtNum(b)}² - 4·${fmtNum(a)}·${fmtNum(c)}). Este valor determina cuántas soluciones tiene nuestra parábola.`,
       tipo: 'resolucion'
     });
 
@@ -1429,9 +1429,9 @@ function analyzeEquation(tokens: Token[]): AnalysisStep[] {
       steps.push({
         paso: sc++,
         titulo: 'Conclusión: Sin soluciones reales',
-        expresionAntes: \`Δ = \${fmtNum(discriminante)} < 0\`,
+        expresionAntes: `Δ = ${fmtNum(discriminante)} < 0`,
         expresionDespues: 'Raíces complejas',
-        explicacion: \`Como el discriminante es negativo, la parábola nunca cruza el eje X. No hay soluciones dentro de los números reales.\`,
+        explicacion: `Como el discriminante es negativo, la parábola nunca cruza el eje X. No hay soluciones dentro de los números reales.`,
         tipo: 'conclusion'
       });
     } else if (Math.abs(discriminante) < 1e-10) {
@@ -1439,10 +1439,10 @@ function analyzeEquation(tokens: Token[]): AnalysisStep[] {
       steps.push({
         paso: sc++,
         titulo: 'Conclusión: Solución única',
-        expresionAntes: \`x = -b / 2a\`,
-        expresionDespues: \`x = \${fmtNum(xVal)}\`,
+        expresionAntes: `x = -b / 2a`,
+        expresionDespues: `x = ${fmtNum(xVal)}`,
         valorCalculado: xVal,
-        explicacion: \`Como el discriminante es exactamente cero, la parábola solo toca el eje X en un único punto.\`,
+        explicacion: `Como el discriminante es exactamente cero, la parábola solo toca el eje X en un único punto.`,
         tipo: 'conclusion'
       });
     } else {
@@ -1451,18 +1451,18 @@ function analyzeEquation(tokens: Token[]): AnalysisStep[] {
       steps.push({
         paso: sc++,
         titulo: 'Conclusión: Dos soluciones',
-        expresionAntes: \`x = (-b ± √Δ) / 2a\`,
-        expresionDespues: \`x₁ = \${fmtNum(x1)}, x₂ = \${fmtNum(x2)}\`,
-        explicacion: \`Como el discriminante es positivo, aplicamos la fórmula general para encontrar los dos puntos exactos donde la parábola cruza el eje X.\`,
+        expresionAntes: `x = (-b ± √Δ) / 2a`,
+        expresionDespues: `x₁ = ${fmtNum(x1)}, x₂ = ${fmtNum(x2)}`,
+        explicacion: `Como el discriminante es positivo, aplicamos la fórmula general para encontrar los dos puntos exactos donde la parábola cruza el eje X.`,
         tipo: 'conclusion'
       });
     }
   } else {
     const val = fullPoly[0] || 0;
     if (Math.abs(val) < 1e-10) {
-       steps.push({ paso: sc++, titulo: 'Identidad', expresionAntes: \`\${val} = 0\`, expresionDespues: 'Infinitas soluciones', explicacion: 'La igualdad es siempre verdadera.', tipo: 'conclusion' });
+       steps.push({ paso: sc++, titulo: 'Identidad', expresionAntes: `${val} = 0`, expresionDespues: 'Infinitas soluciones', explicacion: 'La igualdad es siempre verdadera.', tipo: 'conclusion' });
     } else {
-       steps.push({ paso: sc++, titulo: 'Inconsistencia', expresionAntes: \`\${val} = 0\`, expresionDespues: 'Sin solución', explicacion: 'La igualdad matemática es falsa.', tipo: 'conclusion' });
+       steps.push({ paso: sc++, titulo: 'Inconsistencia', expresionAntes: `${val} = 0`, expresionDespues: 'Sin solución', explicacion: 'La igualdad matemática es falsa.', tipo: 'conclusion' });
     }
   }
 
