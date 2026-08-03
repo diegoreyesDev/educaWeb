@@ -30,7 +30,7 @@ export interface AnalysisStep {
   resultadoIntermedio?: string;
 }
 
-export type TokenType = 'number' | 'operator' | 'function' | 'constant' | 'lparen' | 'rparen';
+export type TokenType = 'number' | 'operator' | 'function' | 'constant' | 'lparen' | 'rparen' | 'variable' | 'equals';
 
 export interface Token {
   type: TokenType;
@@ -102,6 +102,13 @@ export function tokenize(expr: string): Token[] {
       continue;
     }
 
+    // Equals
+    if (ch === '=') {
+      tokens.push({ type: 'equals', value: '=' });
+      i++;
+      continue;
+    }
+
     // π constant
     if (ch === '\u03c0') {
       tokens.push({ type: 'constant', value: 'pi', numericValue: Math.PI });
@@ -127,6 +134,10 @@ export function tokenize(expr: string): Token[] {
       }
       if (lower === 'e') {
         tokens.push({ type: 'constant', value: 'e', numericValue: Math.E });
+        continue;
+      }
+      if (lower === 'x') {
+        tokens.push({ type: 'variable', value: 'x' });
         continue;
       }
       // Unknown word — silently ignored
@@ -224,17 +235,26 @@ function normalizeTokens(tokens: Token[]): Token[] {
         (curr.type === 'number' &&
           (next.type === 'lparen' ||
             next.type === 'function' ||
-            next.type === 'constant')) ||
+            next.type === 'constant' ||
+            next.type === 'variable')) ||
         (curr.type === 'rparen' &&
           (next.type === 'number' ||
             next.type === 'lparen' ||
             next.type === 'function' ||
-            next.type === 'constant')) ||
+            next.type === 'constant' ||
+            next.type === 'variable')) ||
         (curr.type === 'constant' &&
           (next.type === 'number' ||
             next.type === 'lparen' ||
             next.type === 'function' ||
-            next.type === 'constant'));
+            next.type === 'constant' ||
+            next.type === 'variable')) ||
+        (curr.type === 'variable' &&
+          (next.type === 'number' ||
+            next.type === 'lparen' ||
+            next.type === 'function' ||
+            next.type === 'constant' ||
+            next.type === 'variable'));
 
       if (needsMult) {
         inserted.push({ type: 'operator', value: '*' });
@@ -322,8 +342,13 @@ function tokensToString(tokens: Token[]): string {
       continue;
     }
 
-    if (t.type === 'constant') {
+    if (t.type === 'constant' || t.type === 'variable') {
       result += t.value;
+      continue;
+    }
+
+    if (t.type === 'equals') {
+      result += ' = ';
       continue;
     }
 
@@ -1105,6 +1130,10 @@ export class GhostMathEngine {
       ];
     }
 
+    if (normalized.some(t => t.type === 'equals')) {
+      return analyzeEquation(normalized);
+    }
+
     const ctx: EvalContext = {
       stepCounter: { value: 1 },
       isTopLevel: true,
@@ -1114,6 +1143,330 @@ export class GhostMathEngine {
     const { steps } = evaluateStepByStep(normalized, ctx);
     return steps;
   }
+}
+
+// ============================================================================
+// POLYNOMIAL AND EQUATION ENGINE
+// ============================================================================
+
+function polyToString(p: number[]): string {
+  if (p.length === 0) return '0';
+  let terms = [];
+  for (let i = p.length - 1; i >= 0; i--) {
+    let c = p[i];
+    if (Math.abs(c) < 1e-10) continue;
+    let term = '';
+    if (i === 0) {
+      term = String(roundEval(c));
+    } else if (i === 1) {
+      term = (c === 1 ? '' : c === -1 ? '-' : String(roundEval(c))) + 'x';
+    } else {
+      term = (c === 1 ? '' : c === -1 ? '-' : String(roundEval(c))) + 'x^' + i;
+    }
+    terms.push(term);
+  }
+  if (terms.length === 0) return '0';
+  let res = terms[0];
+  for (let i = 1; i < terms.length; i++) {
+    if (terms[i].startsWith('-')) {
+      res += ' - ' + terms[i].substring(1);
+    } else {
+      res += ' + ' + terms[i];
+    }
+  }
+  return res;
+}
+
+function polyAdd(p1: number[], p2: number[], sub: boolean = false): number[] {
+  const len = Math.max(p1.length, p2.length);
+  const r = new Array(len).fill(0);
+  for (let i = 0; i < len; i++) {
+    const a = p1[i] || 0;
+    const b = p2[i] || 0;
+    r[i] = sub ? a - b : a + b;
+  }
+  while (r.length > 1 && Math.abs(r[r.length - 1]) < 1e-10) r.pop();
+  return r;
+}
+
+function polyMul(p1: number[], p2: number[]): number[] {
+  if (p1.length === 0 || p2.length === 0) return [0];
+  const r = new Array(p1.length + p2.length - 1).fill(0);
+  for (let i = 0; i < p1.length; i++) {
+    for (let j = 0; j < p2.length; j++) {
+      r[i + j] += p1[i] * p2[j];
+    }
+  }
+  while (r.length > 1 && Math.abs(r[r.length - 1]) < 1e-10) r.pop();
+  return r;
+}
+
+function parsePoly(tokens: Token[]): number[] | null {
+  let pos = 0;
+
+  function parseExpr(): number[] | null {
+    let p1 = parseTerm();
+    if (!p1) return null;
+    while (pos < tokens.length) {
+      const op = tokens[pos].value;
+      if (op === '+' || op === '-') {
+        pos++;
+        const p2 = parseTerm();
+        if (!p2) return null;
+        p1 = polyAdd(p1, p2, op === '-');
+      } else {
+        break;
+      }
+    }
+    return p1;
+  }
+
+  function parseTerm(): number[] | null {
+    let p1 = parseFactor();
+    if (!p1) return null;
+    while (pos < tokens.length) {
+      const op = tokens[pos].value;
+      if (op === '*' || op === '/') {
+        pos++;
+        const p2 = parseFactor();
+        if (!p2) return null;
+        if (op === '*') {
+          p1 = polyMul(p1, p2);
+        } else {
+          if (p2.length > 1) return null; // Division by variable not supported
+          const scalar = p2[0];
+          p1 = p1.map(c => c / scalar);
+        }
+      } else {
+        break;
+      }
+    }
+    return p1;
+  }
+
+  function parseFactor(): number[] | null {
+    if (pos >= tokens.length) return null;
+    const t = tokens[pos];
+    if (t.type === 'number') {
+      pos++;
+      return [t.numericValue!];
+    }
+    if (t.type === 'variable') {
+      pos++;
+      if (pos < tokens.length && tokens[pos].value === '^') {
+        pos++;
+        const exp = tokens[pos];
+        if (exp && exp.type === 'number' && Number.isInteger(exp.numericValue!) && exp.numericValue! >= 0) {
+          pos++;
+          const p = new Array(exp.numericValue! + 1).fill(0);
+          p[exp.numericValue!] = 1;
+          return p;
+        }
+        return null;
+      }
+      return [0, 1];
+    }
+    if (t.type === 'operator' && (t.value === '-' || t.value === '+')) {
+      const isNeg = t.value === '-';
+      pos++;
+      const p = parseFactor();
+      if (!p) return null;
+      return isNeg ? p.map(c => -c) : p;
+    }
+    if (t.type === 'lparen') {
+      pos++;
+      const p = parseExpr();
+      if (!p) return null;
+      if (pos < tokens.length && tokens[pos].type === 'rparen') {
+        pos++;
+        if (pos < tokens.length && tokens[pos].value === '^') {
+           pos++;
+           const exp = tokens[pos];
+           if (exp && exp.type === 'number' && Number.isInteger(exp.numericValue!) && exp.numericValue! >= 0) {
+              pos++;
+              let res = [1];
+              for (let i = 0; i < exp.numericValue!; i++) res = polyMul(res, p);
+              return res;
+           }
+           return null;
+        }
+        return p;
+      }
+      return null;
+    }
+    return null;
+  }
+
+  const result = parseExpr();
+  if (pos < tokens.length) return null; // Unparsed tokens left
+  return result;
+}
+
+function analyzeEquation(tokens: Token[]): AnalysisStep[] {
+  const steps: AnalysisStep[] = [];
+  let sc = 1;
+
+  const eqIdx = tokens.findIndex(t => t.type === 'equals');
+  const leftTokens = tokens.slice(0, eqIdx);
+  const rightTokens = tokens.slice(eqIdx + 1);
+
+  if (leftTokens.length === 0 || rightTokens.length === 0) {
+    steps.push({
+      paso: sc++,
+      titulo: 'Ecuación incompleta',
+      expresionAntes: tokensToString(tokens),
+      expresionDespues: 'Error',
+      explicacion: 'Una ecuación necesita expresiones válidas en ambos lados del signo igual.',
+      tipo: 'conclusion'
+    });
+    return steps;
+  }
+
+  const leftPoly = parsePoly(leftTokens);
+  const rightPoly = parsePoly(rightTokens);
+
+  if (!leftPoly || !rightPoly) {
+    steps.push({
+      paso: sc++,
+      titulo: 'Error en la ecuación',
+      expresionAntes: tokensToString(tokens),
+      expresionDespues: 'Sintaxis compleja o inválida',
+      explicacion: 'La ecuación contiene elementos no soportados para el análisis paso a paso (por ejemplo, funciones trigonométricas con incógnitas o división por x).',
+      tipo: 'conclusion'
+    });
+    return steps;
+  }
+
+  const degL = leftPoly.length - 1;
+  const degR = rightPoly.length - 1;
+  const degree = Math.max(degL, degR);
+
+  if (degree > 2) {
+    steps.push({
+      paso: sc++,
+      titulo: 'Ecuación de grado superior',
+      expresionAntes: tokensToString(tokens),
+      expresionDespues: 'Grado ' + degree,
+      explicacion: 'GHOST-MATH actualmente soporta análisis paso a paso para ecuaciones de primer y segundo grado.',
+      tipo: 'conclusion'
+    });
+    return steps;
+  }
+
+  steps.push({
+    paso: sc++,
+    titulo: 'Paso 1: Identificación',
+    expresionAntes: tokensToString(tokens),
+    expresionDespues: `${polyToString(leftPoly)} = ${polyToString(rightPoly)}`,
+    explicacion: \`Es una ecuación de grado \${degree}. El objetivo es encontrar el valor de la incógnita 'x' que hace que ambos lados sean iguales.\`,
+    tipo: 'estructural',
+    operacion: 'Simplificación inicial'
+  });
+
+  const fullPoly = polyAdd(leftPoly, rightPoly, true);
+  
+  if (degree === 1) {
+    const b = fullPoly[0] || 0;
+    const a = fullPoly[1] || 0;
+
+    steps.push({
+      paso: sc++,
+      titulo: 'Paso 2: Agrupación de términos',
+      expresionAntes: \`\${polyToString(leftPoly)} = \${polyToString(rightPoly)}\`,
+      expresionDespues: \`\${polyToString([b, a])} = 0\`,
+      explicacion: \`Agrupamos todas las 'x' y los números en un solo lado. Para ello, usamos operaciones inversas en ambos lados. ¡Mantenemos el equilibrio de la balanza!\`,
+      tipo: 'resolucion'
+    });
+
+    if (Math.abs(a) < 1e-10) {
+       if (Math.abs(b) < 1e-10) {
+         steps.push({ paso: sc++, titulo: 'Identidad', expresionAntes: \`\${b} = 0\`, expresionDespues: 'Infinitas soluciones', explicacion: 'Ambos lados son siempre iguales sin importar el valor de x. ¡Cualquier número real es solución!', tipo: 'conclusion' });
+       } else {
+         steps.push({ paso: sc++, titulo: 'Inconsistencia', expresionAntes: \`\${b} = 0\`, expresionDespues: 'Sin solución', explicacion: 'La igualdad es falsa. ¡No existe ningún número x que cumpla esta condición!', tipo: 'conclusion' });
+       }
+       return steps;
+    }
+
+    const xVal = roundEval(-b / a);
+    
+    steps.push({
+      paso: sc++,
+      titulo: 'Paso 3: Despejar la incógnita',
+      expresionAntes: \`\${polyToString([b, a])} = 0\`,
+      expresionDespues: \`x = \${fmtNum(xVal)}\`,
+      valorCalculado: xVal,
+      explicacion: \`Aislamos la 'x' pasando el \${fmtNum(b)} al otro lado con signo opuesto y dividiendo entre el coeficiente \${fmtNum(a)}.\`,
+      tipo: 'conclusion',
+      operacion: \`x = \${fmtNum(-b)} / \${fmtNum(a)}\`
+    });
+
+  } else if (degree === 2) {
+    const c = fullPoly[0] || 0;
+    const b = fullPoly[1] || 0;
+    const a = fullPoly[2] || 0;
+
+    steps.push({
+      paso: sc++,
+      titulo: 'Paso 2: Forma general (ax² + bx + c = 0)',
+      expresionAntes: \`\${polyToString(leftPoly)} = \${polyToString(rightPoly)}\`,
+      expresionDespues: \`\${polyToString([c, b, a])} = 0\`,
+      explicacion: \`Agrupamos todos los términos a la izquierda para igualar a cero. Identificamos: a=\${fmtNum(a)}, b=\${fmtNum(b)}, c=\${fmtNum(c)}.\`,
+      tipo: 'resolucion'
+    });
+
+    const discriminante = roundEval(b * b - 4 * a * c);
+    
+    steps.push({
+      paso: sc++,
+      titulo: 'Paso 3: El Discriminante (Δ)',
+      expresionAntes: \`Δ = b² - 4ac\`,
+      expresionDespues: \`Δ = \${fmtNum(discriminante)}\`,
+      explicacion: \`Calculamos el discriminante (\${fmtNum(b)}² - 4·\${fmtNum(a)}·\${fmtNum(c)}). Este valor determina cuántas soluciones tiene nuestra parábola.\`,
+      tipo: 'resolucion'
+    });
+
+    if (discriminante < -1e-10) {
+      steps.push({
+        paso: sc++,
+        titulo: 'Conclusión: Sin soluciones reales',
+        expresionAntes: \`Δ = \${fmtNum(discriminante)} < 0\`,
+        expresionDespues: 'Raíces complejas',
+        explicacion: \`Como el discriminante es negativo, la parábola nunca cruza el eje X. No hay soluciones dentro de los números reales.\`,
+        tipo: 'conclusion'
+      });
+    } else if (Math.abs(discriminante) < 1e-10) {
+      const xVal = roundEval(-b / (2 * a));
+      steps.push({
+        paso: sc++,
+        titulo: 'Conclusión: Solución única',
+        expresionAntes: \`x = -b / 2a\`,
+        expresionDespues: \`x = \${fmtNum(xVal)}\`,
+        valorCalculado: xVal,
+        explicacion: \`Como el discriminante es exactamente cero, la parábola solo toca el eje X en un único punto.\`,
+        tipo: 'conclusion'
+      });
+    } else {
+      const x1 = roundEval((-b + Math.sqrt(discriminante)) / (2 * a));
+      const x2 = roundEval((-b - Math.sqrt(discriminante)) / (2 * a));
+      steps.push({
+        paso: sc++,
+        titulo: 'Conclusión: Dos soluciones',
+        expresionAntes: \`x = (-b ± √Δ) / 2a\`,
+        expresionDespues: \`x₁ = \${fmtNum(x1)}, x₂ = \${fmtNum(x2)}\`,
+        explicacion: \`Como el discriminante es positivo, aplicamos la fórmula general para encontrar los dos puntos exactos donde la parábola cruza el eje X.\`,
+        tipo: 'conclusion'
+      });
+    }
+  } else {
+    const val = fullPoly[0] || 0;
+    if (Math.abs(val) < 1e-10) {
+       steps.push({ paso: sc++, titulo: 'Identidad', expresionAntes: \`\${val} = 0\`, expresionDespues: 'Infinitas soluciones', explicacion: 'La igualdad es siempre verdadera.', tipo: 'conclusion' });
+    } else {
+       steps.push({ paso: sc++, titulo: 'Inconsistencia', expresionAntes: \`\${val} = 0\`, expresionDespues: 'Sin solución', explicacion: 'La igualdad matemática es falsa.', tipo: 'conclusion' });
+    }
+  }
+
+  return steps;
 }
 
 export const ghostMath = new GhostMathEngine();

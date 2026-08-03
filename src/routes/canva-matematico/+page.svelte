@@ -8,24 +8,23 @@
   let analysisStats = $state({ totalSteps: 0, timeMs: 0, complexity: 'Básico' });
 
   const buttons = [
-    ['sin', 'cos', 'tan', 'log'],
-    ['ln', '√', '(', ')'],
-    ['π', 'e', '^', 'AC'],
-    ['7', '8', '9', '÷'],
-    ['4', '5', '6', '×'],
-    ['1', '2', '3', '-'],
-    ['0', '.', '=', '+']
+    ['sin', 'cos', 'tan', 'log', 'ln'],
+    ['√', '(', ')', '^', 'x'],
+    ['7', '8', '9', '÷', 'AC'],
+    ['4', '5', '6', '×', '⌫'],
+    ['1', '2', '3', '-', '='],
+    ['0', 'π', 'e', '.', 'EXE']
   ];
 
   function btnClass(btn: string): string {
     const base = 'rounded-lg px-2 py-3 text-sm font-semibold transition-all duration-150 active:scale-95 cursor-pointer select-none';
-    if (btn === 'AC') return `${base} bg-red-600 text-white hover:bg-red-500 shadow-md`;
-    if (btn === '=') return `${base} bg-emerald-600 text-white hover:bg-emerald-500 shadow-md`;
+    if (btn === 'AC' || btn === '⌫') return `${base} bg-red-600 text-white hover:bg-red-500 shadow-md`;
+    if (btn === 'EXE') return `${base} bg-emerald-600 text-white hover:bg-emerald-500 shadow-md`;
     if (/^[0-9.]$/.test(btn)) return `${base} bg-gray-700 text-gray-100 hover:bg-gray-600`;
     if (btn === 'sin' || btn === 'cos' || btn === 'tan' || btn === 'log' || btn === 'ln' || btn === '√' || btn === '^')
       return `${base} bg-violet-700 text-violet-100 hover:bg-violet-600`;
-    if (btn === 'π' || btn === 'e') return `${base} bg-violet-700 text-violet-100 hover:bg-violet-600`;
-    if (btn === '+' || btn === '-' || btn === '×' || btn === '÷')
+    if (btn === 'π' || btn === 'e' || btn === 'x') return `${base} bg-violet-700 text-violet-100 hover:bg-violet-600`;
+    if (btn === '+' || btn === '-' || btn === '×' || btn === '÷' || btn === '=')
       return `${base} bg-blue-700 text-blue-100 hover:bg-blue-600`;
     return `${base} bg-gray-600 text-gray-200 hover:bg-gray-500`;
   }
@@ -36,8 +35,12 @@
       calculadora.clear();
     } else if (value === '⌫') {
       calculadora.backspace();
-    } else if (value === '=') {
+    } else if (value === 'EXE') {
       calculadora.calculate();
+    } else if (value === '=') {
+      if (!calculadora.expression.includes('=')) calculadora.append(' = ');
+    } else if (value === 'x') {
+      calculadora.append('x');
     } else if (value === '√') {
       calculadora.append('sqrt(');
     } else if (value === 'sin' || value === 'cos' || value === 'tan' || value === 'log' || value === 'ln') {
@@ -58,7 +61,14 @@
     if (key === '^') handleButton('^');
     if (key === '(') handleButton('(');
     if (key === ')') handleButton(')');
-    if (key === 'Enter' || key === '=') handleButton('=');
+    if (key === '=' || key === 'x' || key === 'X') {
+      e.preventDefault();
+      handleButton(key.toLowerCase());
+    }
+    if (key === 'Enter') {
+      e.preventDefault();
+      handleButton('EXE');
+    }
     if (key === 'Backspace') handleButton('⌫');
     if (key === 'Escape') handleButton('AC');
   }
@@ -282,7 +292,7 @@
           </div>
         {/if}
 
-        <div class="grid grid-cols-4 gap-1.5">
+        <div class="grid grid-cols-5 gap-1.5">
           {#each buttons as row}
             {#each row as btn}
               <button class={btnClass(btn)} onclick={() => handleButton(btn)}>
