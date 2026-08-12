@@ -16,21 +16,21 @@ export function analyze(ast: MathNode): { semantic: SemanticAnalysis; report: De
   // Análisis Profundo
   const report: DeepAnalysisReport = {
     objectType: ast.type === 'Equation' ? 'Ecuación algebraica' : 'Expresión matemática',
-    domain: 'Álgebra',
-    subdomain: 'Polinomios',
-    theme: 'Ecuaciones lineales',
-    curricularLevel: 'Enseñanza Media',
+    domain: ast.type === 'Equation' ? 'Álgebra' : 'Aritmética',
+    subdomain: ast.type === 'Equation' ? 'Polinomios' : 'Operaciones Básicas',
+    theme: ast.type === 'Equation' ? 'Ecuaciones lineales' : 'Cálculo Aritmético',
+    curricularLevel: ast.type === 'Equation' ? 'Enseñanza Media' : 'Educación Básica/Media',
     complexity: {
       operational: 2,
-      conceptual: 4,
-      abstraction: 3,
-      totalDifficulty: (2+4+3) / 3,
+      conceptual: ast.type === 'Equation' ? 4 : 2,
+      abstraction: ast.type === 'Equation' ? 3 : 1,
+      totalDifficulty: ast.type === 'Equation' ? (2+4+3) / 3 : (2+2+1) / 3,
     },
     recommendedMethod: {
       name: ast.type === 'Equation' ? 'Despeje directo' : 'Evaluación aritmética',
       justification: ast.type === 'Equation' ? 'La variable aparece aislada y puede resolverse mediante operaciones inversas básicas.' : 'Expresión puramente aritmética, se resolverá respetando la jerarquía de operaciones (PEMDAS).',
     },
-    estimatedTimeSecs: 60,
+    estimatedTimeSecs: ast.type === 'Equation' ? 60 : 15,
   };
 
   return { semantic, report };
