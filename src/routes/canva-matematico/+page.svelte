@@ -1,6 +1,6 @@
 <script lang="ts">
   import { calculadora } from '$lib/utils/calculator.svelte';
-  import { ghostMath, type AnalysisStep } from '$lib/utils/ghost-math-engine';
+  import { ghostMath, type AnalysisStep } from '$lib/utils/ghost-math';
 
   let analysisResults: AnalysisStep[] = $state([]);
   let hasAnalyzed = $state(false);
