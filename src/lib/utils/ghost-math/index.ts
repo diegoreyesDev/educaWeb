@@ -96,10 +96,15 @@ export class GhostMathExpert {
        const isLast = (i === steps.length - 1);
        
        let extractedValue: number | undefined = undefined;
-       if (isLast && step.currentState.includes('=')) {
-          const parts = step.currentState.split('=');
-          if (parts.length === 2) {
-             const val = parseFloat(parts[1].trim());
+       if (isLast) {
+          if (step.currentState.includes('=')) {
+             const parts = step.currentState.split('=');
+             if (parts.length === 2) {
+                const val = parseFloat(parts[1].trim());
+                if (!isNaN(val)) extractedValue = val;
+             }
+          } else {
+             const val = parseFloat(step.currentState.trim());
              if (!isNaN(val)) extractedValue = val;
           }
        }

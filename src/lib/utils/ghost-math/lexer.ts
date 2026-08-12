@@ -32,8 +32,8 @@ export class Lexer {
 
       if (c === '+') { tokens.push(this.advanceToken('Plus', c)); continue; }
       if (c === '-') { tokens.push(this.advanceToken('Minus', c)); continue; }
-      if (c === '*') { tokens.push(this.advanceToken('Asterisk', c)); continue; }
-      if (c === '/') { tokens.push(this.advanceToken('Slash', c)); continue; }
+      if (c === '*' || c === '×') { tokens.push(this.advanceToken('Asterisk', c)); continue; }
+      if (c === '/' || c === '÷') { tokens.push(this.advanceToken('Slash', c)); continue; }
       if (c === '^') { tokens.push(this.advanceToken('Caret', c)); continue; }
       if (c === '=') { tokens.push(this.advanceToken('Equals', c)); continue; }
       if (c === '(') { tokens.push(this.advanceToken('LParen', c)); continue; }

@@ -27,8 +27,8 @@ export function analyze(ast: MathNode): { semantic: SemanticAnalysis; report: De
       totalDifficulty: (2+4+3) / 3,
     },
     recommendedMethod: {
-      name: 'Despeje directo',
-      justification: 'La variable aparece aislada y puede resolverse mediante operaciones inversas básicas.',
+      name: ast.type === 'Equation' ? 'Despeje directo' : 'Evaluación aritmética',
+      justification: ast.type === 'Equation' ? 'La variable aparece aislada y puede resolverse mediante operaciones inversas básicas.' : 'Expresión puramente aritmética, se resolverá respetando la jerarquía de operaciones (PEMDAS).',
     },
     estimatedTimeSecs: 60,
   };
