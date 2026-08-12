@@ -7,8 +7,7 @@
   let isAnalyzing = $state(false);
   let analysisStats = $state({ totalSteps: 0, timeMs: 0, complexity: 'Básico' });
 
-  let activeTab: string = $state("Álgebra");
-  const tabs = ["Álgebra", "Trigonometría", "Cálculo"];
+
 
   const buttons = [
     ['□/□', '√□', '<', '(', ')', '⌫', 'AC'],
@@ -311,17 +310,7 @@
           </div>
         {/if}
 
-        <!-- Pestañas -->
-        <div class="flex gap-6 border-b border-gray-700 mb-6 pb-2 px-2">
-          {#each tabs as tab}
-            <button 
-              class="pb-2 text-sm transition-colors {activeTab === tab ? 'text-white border-b-2 border-white' : 'text-gray-500 hover:text-gray-300'}"
-              onclick={() => activeTab = tab}
-            >
-              {tab}
-            </button>
-          {/each}
-        </div>
+
 
         <!-- Teclado (CSS Grid) -->
         <div class="grid grid-cols-7 gap-2 mb-6">
