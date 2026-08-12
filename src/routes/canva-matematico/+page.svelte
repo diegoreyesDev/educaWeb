@@ -18,15 +18,34 @@
     ['x', 'y', '=', '0', '.', 'SEND', '+']
   ];
 
-  const examples = [
+  const allExamples = [
+    "5 × 2 + 10",
+    "3 + 4 * 2 / 2^2",
+    "2x + 4 = 10",
+    "3(x - 2) = 9",
+    "x^2 - 4 = 0",
     "4x^2 - 5x - 12 = 0",
-    "x^2 - 5x + 6 = 0",
-    "3x^2 - 5x + 2 = 0"
+    "sin(30) + cos(60)",
+    "log(100) + ln(e)",
+    "sqrt(16) * 2^3",
+    "x/2 + 5 = 15"
   ];
+  let examples = $state<string[]>([]);
+
+  function shuffleExamples() {
+    examples = [...allExamples].sort(() => 0.5 - Math.random()).slice(0, 3);
+  }
+  // Initialize
+  shuffleExamples();
 
   function btnClass(btn: string): string {
-    if (btn === 'SEND') return "bg-[#cbb5ff] text-black rounded-full h-12 flex items-center justify-center hover:bg-[#b89fff] active:scale-95 transition-transform font-bold";
-    return "bg-[#303038] hover:bg-[#3e3e48] text-white h-12 rounded-full flex items-center justify-center text-sm active:scale-95 transition-transform font-medium";
+    const base = "h-12 rounded-full flex items-center justify-center text-sm active:scale-95 transition-transform font-medium";
+    if (btn === 'SEND') return `${base} bg-[#cbb5ff] hover:bg-[#b89fff] text-black font-bold text-lg`;
+    if (btn === 'AC' || btn === '⌫') return `${base} bg-red-900/40 hover:bg-red-800/60 text-red-300 border border-red-800/30`;
+    if (/^[0-9.]$/.test(btn)) return `${base} bg-[#3a3a44] hover:bg-[#4a4a55] text-gray-100 text-lg`;
+    if (/^[xyabc]$/.test(btn) || ['□/□', '√□', 'x²', '|□|', 'log_□', '□!', 'i', '%', '(', ')'].includes(btn)) 
+        return `${base} bg-indigo-900/30 hover:bg-indigo-800/50 text-indigo-300 italic border border-indigo-800/30`;
+    return `${base} bg-[#303038] hover:bg-[#3e3e48] text-gray-300`;
   }
 
   function handleButton(value: string) {
@@ -276,9 +295,10 @@
         <div class="relative flex items-center mb-6">
           <input 
             type="text" 
-            value={calculadora.expression}
-            class="w-full bg-[#2a2a32] text-white text-xl p-4 rounded-xl outline-none border border-transparent focus:border-gray-500 transition-all font-mono"
-            readonly
+            bind:value={calculadora.expression}
+            oninput={(e) => calculadora.expression = (e.target as HTMLInputElement).value}
+            class="w-full bg-[#2a2a32] text-white text-xl p-4 pr-12 rounded-xl outline-none border border-transparent focus:border-gray-500 transition-all font-mono"
+            placeholder="Escribe o pega una expresión..."
           />
           <button class="absolute right-4 text-gray-400 hover:text-white" onclick={() => calculadora.clear()}>
             ✕
@@ -336,7 +356,12 @@
 
         <!-- Ejemplos -->
         <div class="mt-4">
-          <h3 class="text-gray-400 mb-3 text-sm">Ejemplos</h3>
+          <div class="flex items-center gap-2 mb-3">
+            <h3 class="text-gray-400 text-sm m-0">Ejemplos aleatorios</h3>
+            <button onclick={shuffleExamples} class="text-gray-500 hover:text-white transition-colors" title="Cargar otros ejemplos">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+            </button>
+          </div>
           <div class="flex gap-2 overflow-x-auto pb-2 scrollbar-hide" style="scrollbar-width: none; -ms-overflow-style: none;">
             {#each examples as ex}
               <button 
