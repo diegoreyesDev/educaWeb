@@ -1,6 +1,9 @@
 import type { MathNode, SemanticAnalysis, DeepAnalysisReport, ResolutionStep } from './types';
 
 export function solve(ast: MathNode, semantic: SemanticAnalysis, report: DeepAnalysisReport): ResolutionStep[] {
+  if (report.recommendedMethod.name === 'Fórmula General') {
+    return solveQuadraticFormula(ast);
+  }
   if (report.recommendedMethod.name === 'Despeje directo') {
     return solveDirectIsolation(ast);
   }
@@ -310,6 +313,119 @@ function solveDirectIsolation(ast: MathNode): ResolutionStep[] {
 
     throw new Error(`Operaciones en el AST no soportadas para Despeje Directo en este prototipo (nodo actual: ${left.type}).`);
   }
+
+  return steps;
+}
+
+// -----------------------------------------------------------------
+// SOLVER 3: FÓRMULA GENERAL (Ecuaciones Cuadráticas)
+// -----------------------------------------------------------------
+function evaluateAtPoly(ast: MathNode, val: number): number {
+  if (ast.type === 'Number') return ast.value;
+  if (ast.type === 'Variable') return val;
+  if (ast.type === 'Add') return evaluateAtPoly(ast.left, val) + evaluateAtPoly(ast.right, val);
+  if (ast.type === 'Subtract') return evaluateAtPoly(ast.left, val) - evaluateAtPoly(ast.right, val);
+  if (ast.type === 'Multiply') return evaluateAtPoly(ast.left, val) * evaluateAtPoly(ast.right, val);
+  if (ast.type === 'Divide') return evaluateAtPoly(ast.left, val) / evaluateAtPoly(ast.right, val);
+  if (ast.type === 'Power') return Math.pow(evaluateAtPoly(ast.base, val), evaluateAtPoly(ast.exp, val));
+  return 0;
+}
+
+function solveQuadraticFormula(ast: MathNode): ResolutionStep[] {
+  const steps: ResolutionStep[] = [];
+  let stepCounter = 1;
+
+  steps.push({
+    stepId: `STEP_${stepCounter++}`,
+    description: "Análisis inicial de la ecuación cuadrática.",
+    currentState: formatNode(ast),
+    appliedProperty: "Forma Estándar",
+    justification: "Se detecta una ecuación polinómica de segundo grado."
+  });
+
+  if (ast.type !== 'Equation') {
+    throw new Error("El nodo raíz no es una ecuación.");
+  }
+
+  const f = (x: number) => evaluateAtPoly(ast.left, x) - evaluateAtPoly(ast.right, x);
+  const c = f(0);
+  const f1 = f(1);
+  const fm1 = f(-1);
+  const a = (f1 + fm1 - 2 * c) / 2;
+  const b = f1 - c - a;
+
+  const aStr = Number.isInteger(a) ? a.toString() : a.toFixed(2);
+  const bStr = Number.isInteger(b) ? b.toString() : b.toFixed(2);
+  const cStr = Number.isInteger(c) ? c.toString() : c.toFixed(2);
+
+  steps.push({
+    stepId: `STEP_${stepCounter++}`,
+    description: "Extracción de coeficientes.",
+    currentState: `a = ${aStr}, b = ${bStr}, c = ${cStr}`,
+    appliedProperty: "Estructura Algebraica",
+    justification: "Se identifican los términos cuadrático (a), lineal (b) y constante (c)."
+  });
+
+  const discriminante = b * b - 4 * a * c;
+  const dStr = Number.isInteger(discriminante) ? discriminante.toString() : discriminante.toFixed(2);
+
+  steps.push({
+    stepId: `STEP_${stepCounter++}`,
+    description: `Calcular el Discriminante (Δ = b² - 4ac).`,
+    currentState: `Δ = (${bStr})² - 4(${aStr})(${cStr}) = ${dStr}`,
+    appliedProperty: "Discriminante",
+    justification: discriminante > 0 
+      ? "Δ > 0, existen dos raíces reales y distintas." 
+      : discriminante === 0 
+        ? "Δ = 0, existe una raíz real repetida (doble)." 
+        : "Δ < 0, las raíces son complejas."
+  });
+
+  if (discriminante < 0) {
+    steps.push({
+      stepId: `STEP_${stepCounter++}`,
+      description: "Resolución detenida.",
+      currentState: `No existen soluciones reales.`,
+      appliedProperty: "Conclusión Cuadrática",
+      justification: "Dado que el discriminante es negativo, la parábola no cruza el eje X (soluciones en los números complejos)."
+    });
+    return steps;
+  }
+
+  const sqrtD = Math.sqrt(discriminante);
+  const x1 = (-b + sqrtD) / (2 * a);
+  const x2 = (-b - sqrtD) / (2 * a);
+
+  const x1Str = Number.isInteger(x1) ? x1.toString() : x1.toFixed(3);
+  const x2Str = Number.isInteger(x2) ? x2.toString() : x2.toFixed(3);
+
+  steps.push({
+    stepId: `STEP_${stepCounter++}`,
+    description: `Aplicar fórmula de Bhaskara: x = (-b ± √Δ) / 2a`,
+    currentState: `x = (-${bStr} ± √${dStr}) / (2 * ${aStr})`,
+    appliedProperty: "Fórmula General",
+    justification: "Se sustituyen los valores para encontrar los puntos de intersección."
+  });
+
+  steps.push({
+    stepId: `STEP_${stepCounter++}`,
+    description: "Desglose de raíces (x₁ y x₂).",
+    currentState: `x₁ = ${x1Str} | x₂ = ${x2Str}`,
+    appliedProperty: "Raíces del Polinomio",
+    justification: "Soluciones de la ecuación."
+  });
+
+  // Emulate setting the final calculated value
+  // We'll put both roots in the last state
+  const finalState = discriminante === 0 ? `x = ${x1Str}` : `x₁ = ${x1Str}, x₂ = ${x2Str}`;
+
+  steps.push({
+    stepId: `STEP_${stepCounter++}`,
+    description: "Evaluación completada.",
+    currentState: finalState,
+    appliedProperty: "Resultado Final",
+    justification: "Se han determinado los valores que satisfacen la ecuación cuadrática original."
+  });
 
   return steps;
 }

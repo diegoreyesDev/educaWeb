@@ -12,7 +12,7 @@ export interface AnalysisStep {
   titulo: string;
   expresionAntes: string;
   expresionDespues: string;
-  valorCalculado?: number;
+  valorCalculado?: number | string;
   explicacion: string;
   tipo: 'estructural' | 'resolucion' | 'conclusion';
   operacion?: string;
@@ -95,17 +95,21 @@ export class GhostMathExpert {
        const step = steps[i];
        const isLast = (i === steps.length - 1);
        
-       let extractedValue: number | undefined = undefined;
+       let extractedValue: number | string | undefined = undefined;
        if (isLast) {
           if (step.currentState.includes('=')) {
              const parts = step.currentState.split('=');
              if (parts.length === 2) {
                 const val = parseFloat(parts[1].trim());
                 if (!isNaN(val)) extractedValue = val;
+                else extractedValue = parts[1].trim();
+             } else if (parts.length > 2) {
+                extractedValue = step.currentState;
              }
           } else {
              const val = parseFloat(step.currentState.trim());
              if (!isNaN(val)) extractedValue = val;
+             else extractedValue = step.currentState.trim();
           }
        }
 

@@ -1,8 +1,19 @@
 import type { MathNode, SemanticAnalysis, DeepAnalysisReport } from './types';
-import { buildUniversalGraph } from './graph';
+
+// Helper to evaluate polynomial for degree checking
+function evaluateAt(ast: MathNode, val: number): number {
+  if (ast.type === 'Number') return ast.value;
+  if (ast.type === 'Variable') return val;
+  if (ast.type === 'Add') return evaluateAt(ast.left, val) + evaluateAt(ast.right, val);
+  if (ast.type === 'Subtract') return evaluateAt(ast.left, val) - evaluateAt(ast.right, val);
+  if (ast.type === 'Multiply') return evaluateAt(ast.left, val) * evaluateAt(ast.right, val);
+  if (ast.type === 'Divide') return evaluateAt(ast.left, val) / evaluateAt(ast.right, val);
+  if (ast.type === 'Power') return Math.pow(evaluateAt(ast.base, val), evaluateAt(ast.exp, val));
+  if (ast.type === 'FunctionCall') return 0; // unsupported for simple poly check
+  return 0;
+}
 
 export function analyze(ast: MathNode): { semantic: SemanticAnalysis; report: DeepAnalysisReport } {
-  // Mockup semántico: en un caso real se recorre el AST para buscar variables y grados
   const semantic: SemanticAnalysis = {
     variables: ['x'],
     constants: [],
@@ -11,26 +22,50 @@ export function analyze(ast: MathNode): { semantic: SemanticAnalysis; report: De
     domain: 'Números Reales',
   };
 
-  const graph = buildUniversalGraph();
+  let isQuadratic = false;
+  if (ast.type === 'Equation') {
+    const f = (x: number) => evaluateAt(ast.left, x) - evaluateAt(ast.right, x);
+    const c = f(0);
+    const f1 = f(1);
+    const fm1 = f(-1);
+    const a = (f1 + fm1 - 2 * c) / 2;
+    const b = f1 - c - a;
+    const f2 = f(2);
+    // Check if it matches a parabola and a !== 0
+    if (Math.abs(a) > 1e-7 && Math.abs(f2 - (a * 4 + b * 2 + c)) < 1e-7) {
+      isQuadratic = true;
+    }
+  }
+
+  const isEq = ast.type === 'Equation';
+  let method = isEq ? 'Despeje directo' : 'Evaluación aritmética';
+  let just = isEq ? 'La variable aparece aislada y puede resolverse mediante operaciones inversas básicas.' : 'Expresión puramente aritmética, se resolverá respetando la jerarquía de operaciones (PEMDAS).';
+  let theme = isEq ? 'Ecuaciones lineales' : 'Cálculo Aritmético';
+
+  if (isQuadratic) {
+    method = 'Fórmula General';
+    just = 'Ecuación de segundo grado detectada. Se aplicará la fórmula de Bhaskara para encontrar las raíces.';
+    theme = 'Ecuaciones cuadráticas';
+  }
 
   // Análisis Profundo
   const report: DeepAnalysisReport = {
-    objectType: ast.type === 'Equation' ? 'Ecuación algebraica' : 'Expresión matemática',
-    domain: ast.type === 'Equation' ? 'Álgebra' : 'Aritmética',
-    subdomain: ast.type === 'Equation' ? 'Polinomios' : 'Operaciones Básicas',
-    theme: ast.type === 'Equation' ? 'Ecuaciones lineales' : 'Cálculo Aritmético',
-    curricularLevel: ast.type === 'Equation' ? 'Enseñanza Media' : 'Educación Básica/Media',
+    objectType: isEq ? 'Ecuación algebraica' : 'Expresión matemática',
+    domain: isEq ? 'Álgebra' : 'Aritmética',
+    subdomain: isEq ? 'Polinomios' : 'Operaciones Básicas',
+    theme,
+    curricularLevel: isEq ? 'Enseñanza Media' : 'Educación Básica/Media',
     complexity: {
-      operational: 2,
-      conceptual: ast.type === 'Equation' ? 4 : 2,
-      abstraction: ast.type === 'Equation' ? 3 : 1,
-      totalDifficulty: ast.type === 'Equation' ? (2+4+3) / 3 : (2+2+1) / 3,
+      operational: isQuadratic ? 4 : 2,
+      conceptual: isEq ? 4 : 2,
+      abstraction: isEq ? 3 : 1,
+      totalDifficulty: isEq ? (isQuadratic ? 4 : 3) : 1.6,
     },
     recommendedMethod: {
-      name: ast.type === 'Equation' ? 'Despeje directo' : 'Evaluación aritmética',
-      justification: ast.type === 'Equation' ? 'La variable aparece aislada y puede resolverse mediante operaciones inversas básicas.' : 'Expresión puramente aritmética, se resolverá respetando la jerarquía de operaciones (PEMDAS).',
+      name: method,
+      justification: just,
     },
-    estimatedTimeSecs: ast.type === 'Equation' ? 60 : 15,
+    estimatedTimeSecs: isQuadratic ? 120 : (isEq ? 60 : 15),
   };
 
   return { semantic, report };
