@@ -95,19 +95,19 @@ function evaluateArithmetic(ast: MathNode): ResolutionStep[] {
           case 'Add': 
             res = leftVal + rightVal; 
             opDesc = `Sumar ${leftVal} + ${rightVal}`; 
-            prop = "Adición"; just = "Juntamos ambas cantidades."; break;
+            prop = "Adición (Suma)"; just = "Combinamos ambas cantidades numéricas según la regla de los signos, respetando el orden PEMDAS."; break;
           case 'Subtract': 
             res = leftVal - rightVal; 
             opDesc = `Restar ${leftVal} - ${rightVal}`; 
-            prop = "Sustracción"; just = "Diferencia entre las cantidades."; break;
+            prop = "Sustracción (Resta)"; just = "Calculamos la diferencia entre ambos valores, reduciendo la expresión."; break;
           case 'Multiply': 
             res = leftVal * rightVal; 
-            opDesc = `Multiplicar ${leftVal} * ${rightVal}`; 
-            prop = "Multiplicación"; just = "Suma repetida."; break;
+            opDesc = `Multiplicar ${leftVal} × ${rightVal}`; 
+            prop = "Multiplicación (Producto)"; just = "Evaluamos el producto de los factores antes que las sumas o restas."; break;
           case 'Divide': 
             res = leftVal / rightVal; 
-            opDesc = `Dividir ${leftVal} / ${rightVal}`; 
-            prop = "División"; just = "Repartimos en partes iguales."; break;
+            opDesc = `Dividir ${leftVal} ÷ ${rightVal}`; 
+            prop = "División (Cociente)"; just = "Repartimos el dividendo entre el divisor (operación prioritaria)."; break;
         }
         
         const nextNode = { type: 'Number', value: res } as MathNode;
@@ -135,10 +135,10 @@ function evaluateArithmetic(ast: MathNode): ResolutionStep[] {
         replaceNodeInAst(node, nextNode);
         steps.push({
           stepId: `STEP_${stepCounter++}`,
-          description: `Elevar ${(b as any).value} a la ${(e as any).value}`,
+          description: `Calcular la potencia: ${b.value}^${e.value}`,
           currentState: formatNode(ast),
-          appliedProperty: "Potenciación",
-          justification: "Multiplicamos la base tantas veces indique el exponente."
+          appliedProperty: "Potenciación (Exponentes)",
+          justification: "Resolvemos las potencias (E en PEMDAS) multiplicando la base por sí misma tantas veces como indica el exponente."
         });
         return nextNode;
       }
@@ -209,10 +209,10 @@ function solveDirectIsolation(ast: MathNode): ResolutionStep[] {
 
   steps.push({
     stepId: `STEP_${stepCounter++}`,
-    description: "Análisis inicial de la ecuación.",
+    description: "Análisis inicial de la ecuación lineal.",
     currentState: formatNode(ast),
-    appliedProperty: "Identidad",
-    justification: "Ecuación original planteada en el problema."
+    appliedProperty: "Planteamiento de Igualdad",
+    justification: "El objetivo de resolver una ecuación es despejar la incógnita (la letra). Imaginamos la ecuación como una balanza en equilibrio perfecto."
   });
 
   if (ast.type !== 'Equation') {
@@ -234,10 +234,10 @@ function solveDirectIsolation(ast: MathNode): ResolutionStep[] {
     if (left.type === 'Variable') {
       steps.push({
         stepId: `STEP_${stepCounter++}`,
-        description: "Variable aislada con éxito.",
+        description: "Despeje completado exitosamente.",
         currentState: `${formatNode(left)} = ${formatNode(right)}`,
-        appliedProperty: "Finalización",
-        justification: "Se ha encontrado el valor de la incógnita."
+        appliedProperty: "Aislamiento Total",
+        justification: "Al quedar la variable completamente sola en un lado, el valor del otro lado representa su solución final."
       });
       break;
     }
@@ -250,10 +250,10 @@ function solveDirectIsolation(ast: MathNode): ResolutionStep[] {
         
         steps.push({
           stepId: `STEP_${stepCounter++}`,
-          description: `Restar ${c} en ambos miembros.`,
+          description: `Restar ${c} en ambos lados.`,
           currentState: `${formatNode(left)} = ${formatNode(right)}`,
-          appliedProperty: "Propiedad Uniforme (Inverso Aditivo)",
-          justification: "Aislar el término restando la constante aditiva."
+          appliedProperty: "Inverso Aditivo (Cancelar Suma)",
+          justification: "Para eliminar un número que suma, realizamos la operación contraria (resta) a ambos lados para no alterar la balanza."
         });
         continue;
       }
@@ -267,10 +267,10 @@ function solveDirectIsolation(ast: MathNode): ResolutionStep[] {
         
         steps.push({
           stepId: `STEP_${stepCounter++}`,
-          description: `Sumar ${c} en ambos miembros.`,
+          description: `Sumar ${c} en ambos lados.`,
           currentState: `${formatNode(left)} = ${formatNode(right)}`,
-          appliedProperty: "Propiedad Uniforme (Inverso Aditivo)",
-          justification: "Neutralizar el término negativo sumando su opuesto."
+          appliedProperty: "Inverso Aditivo (Cancelar Resta)",
+          justification: "Para eliminar un número negativo o resta, sumamos esa misma cantidad en ambos miembros para mantener el equilibrio."
         });
         continue;
       }
@@ -284,10 +284,10 @@ function solveDirectIsolation(ast: MathNode): ResolutionStep[] {
         
         steps.push({
           stepId: `STEP_${stepCounter++}`,
-          description: `Dividir entre ${c} en ambos miembros.`,
+          description: `Dividir entre ${c} ambos lados.`,
           currentState: `${formatNode(left)} = ${formatNode(right)}`,
-          appliedProperty: "Propiedad Uniforme (Inverso Multiplicativo)",
-          justification: "Eliminar el coeficiente dividiendo toda la ecuación."
+          appliedProperty: "Inverso Multiplicativo (Cancelar Multiplicación)",
+          justification: "Como el número multiplica a la incógnita, dividimos ambos lados entre dicho valor para dejar la variable con coeficiente 1."
         });
         continue;
       }
@@ -302,10 +302,10 @@ function solveDirectIsolation(ast: MathNode): ResolutionStep[] {
         
         steps.push({
           stepId: `STEP_${stepCounter++}`,
-          description: `Aplicar raíz de índice ${c} en ambos miembros.`,
+          description: `Aplicar raíz de índice ${c} en ambos lados.`,
           currentState: `${formatNode(left)} = ${formatNode(right)}`,
-          appliedProperty: "Propiedad Uniforme de la Radicación",
-          justification: "Neutralizar el exponente mediante la raíz equivalente."
+          appliedProperty: "Radicación (Cancelar Potencia)",
+          justification: "Para eliminar un exponente, aplicamos la raíz equivalente a ambos lados de la ecuación."
         });
         continue;
       }
@@ -337,10 +337,10 @@ function solveQuadraticFormula(ast: MathNode): ResolutionStep[] {
 
   steps.push({
     stepId: `STEP_${stepCounter++}`,
-    description: "Análisis inicial de la ecuación cuadrática.",
+    description: "Reconocimiento de la Ecuación Cuadrática.",
     currentState: formatNode(ast),
-    appliedProperty: "Forma Estándar",
-    justification: "Se detecta una ecuación polinómica de segundo grado."
+    appliedProperty: "Inspección Algebraica",
+    justification: "Se detecta que la variable está elevada al cuadrado (x²), por lo que es una ecuación de segundo grado que requiere métodos avanzados."
   });
 
   if (ast.type !== 'Equation') {
@@ -360,71 +360,139 @@ function solveQuadraticFormula(ast: MathNode): ResolutionStep[] {
 
   steps.push({
     stepId: `STEP_${stepCounter++}`,
-    description: "Extracción de coeficientes.",
-    currentState: `a = ${aStr}, b = ${bStr}, c = ${cStr}`,
-    appliedProperty: "Estructura Algebraica",
-    justification: "Se identifican los términos cuadrático (a), lineal (b) y constante (c)."
+    description: "Ordenamiento a la Forma Estándar.",
+    currentState: `${aStr}x² ${b >= 0 ? '+' : ''}${bStr}x ${c >= 0 ? '+' : ''}${cStr} = 0`,
+    appliedProperty: "Forma General (ax² + bx + c = 0)",
+    justification: "Para resolverla, agrupamos todos los términos a un lado de la igualdad, dejándola igualada a cero."
   });
 
-  const discriminante = b * b - 4 * a * c;
+  steps.push({
+    stepId: `STEP_${stepCounter++}`,
+    description: "Identificación de Coeficientes.",
+    currentState: `a = ${aStr} | b = ${bStr} | c = ${cStr}`,
+    appliedProperty: "Abstracción Simbólica",
+    justification: "Extraemos los valores numéricos que acompañan a x² (a), a x (b) y al término independiente (c)."
+  });
+
+  steps.push({
+    stepId: `STEP_${stepCounter++}`,
+    description: "Planteamiento del Discriminante (Δ).",
+    currentState: `Δ = b² - 4ac`,
+    appliedProperty: "Fórmula del Discriminante",
+    justification: "El discriminante nos dirá cuántas soluciones tiene la ecuación antes de resolverla por completo."
+  });
+
+  steps.push({
+    stepId: `STEP_${stepCounter++}`,
+    description: "Sustitución en el Discriminante.",
+    currentState: `Δ = (${bStr})² - 4(${aStr})(${cStr})`,
+    appliedProperty: "Sustitución Algebraica",
+    justification: "Reemplazamos las letras b, a y c por sus respectivos valores numéricos."
+  });
+
+  const bSquared = b * b;
+  const fourAC = 4 * a * c;
+  steps.push({
+    stepId: `STEP_${stepCounter++}`,
+    description: "Cálculo de Potencia y Multiplicación.",
+    currentState: `Δ = ${Number.isInteger(bSquared) ? bSquared : bSquared.toFixed(2)} - (${Number.isInteger(fourAC) ? fourAC : fourAC.toFixed(2)})`,
+    appliedProperty: "Jerarquía de Operaciones",
+    justification: "Resolvemos primero la potencia cuadrada y luego la multiplicación triple."
+  });
+
+  const discriminante = bSquared - fourAC;
   const dStr = Number.isInteger(discriminante) ? discriminante.toString() : discriminante.toFixed(2);
 
   steps.push({
     stepId: `STEP_${stepCounter++}`,
-    description: `Calcular el Discriminante (Δ = b² - 4ac).`,
-    currentState: `Δ = (${bStr})² - 4(${aStr})(${cStr}) = ${dStr}`,
-    appliedProperty: "Discriminante",
+    description: `Valor Final del Discriminante.`,
+    currentState: `Δ = ${dStr}`,
+    appliedProperty: "Naturaleza de las Raíces",
     justification: discriminante > 0 
-      ? "Δ > 0, existen dos raíces reales y distintas." 
+      ? "Como Δ es positivo (> 0), la ecuación tiene dos soluciones reales y distintas. La parábola corta el eje X en dos puntos." 
       : discriminante === 0 
-        ? "Δ = 0, existe una raíz real repetida (doble)." 
-        : "Δ < 0, las raíces son complejas."
+        ? "Como Δ es cero, la ecuación tiene una única solución real (raíz doble). La parábola solo toca el eje X en un punto." 
+        : "Como Δ es negativo (< 0), la ecuación no tiene soluciones reales (son complejas). La parábola no toca el eje X."
   });
 
   if (discriminante < 0) {
     steps.push({
       stepId: `STEP_${stepCounter++}`,
-      description: "Resolución detenida.",
-      currentState: `No existen soluciones reales.`,
-      appliedProperty: "Conclusión Cuadrática",
-      justification: "Dado que el discriminante es negativo, la parábola no cruza el eje X (soluciones en los números complejos)."
+      description: "Resolución Detenida.",
+      currentState: `Sin soluciones reales.`,
+      appliedProperty: "Conclusión",
+      justification: "El proceso se detiene aquí para el conjunto de los números reales."
     });
     return steps;
   }
 
+  steps.push({
+    stepId: `STEP_${stepCounter++}`,
+    description: "Planteamiento de la Fórmula General (Bhaskara).",
+    currentState: `x = (-b ± √Δ) / 2a`,
+    appliedProperty: "Fórmula General Cuadrática",
+    justification: "Utilizamos la fórmula universal para encontrar exactamente dónde están las soluciones."
+  });
+
   const sqrtD = Math.sqrt(discriminante);
+  const sqrtDStr = Number.isInteger(sqrtD) ? sqrtD.toString() : sqrtD.toFixed(3);
+  const twoA = 2 * a;
+  const twoAStr = Number.isInteger(twoA) ? twoA.toString() : twoA.toFixed(2);
+
+  steps.push({
+    stepId: `STEP_${stepCounter++}`,
+    description: "Sustitución y Cálculo de Raíz.",
+    currentState: `x = (-(${bStr}) ± ${sqrtDStr}) / ${twoAStr}`,
+    appliedProperty: "Operaciones Aritméticas Básicas",
+    justification: "Sustituimos -b, extraemos la raíz cuadrada de Δ y multiplicamos el denominador (2a)."
+  });
+
   const x1 = (-b + sqrtD) / (2 * a);
   const x2 = (-b - sqrtD) / (2 * a);
 
   const x1Str = Number.isInteger(x1) ? x1.toString() : x1.toFixed(3);
   const x2Str = Number.isInteger(x2) ? x2.toString() : x2.toFixed(3);
 
-  steps.push({
-    stepId: `STEP_${stepCounter++}`,
-    description: `Aplicar fórmula de Bhaskara: x = (-b ± √Δ) / 2a`,
-    currentState: `x = (-${bStr} ± √${dStr}) / (2 * ${aStr})`,
-    appliedProperty: "Fórmula General",
-    justification: "Se sustituyen los valores para encontrar los puntos de intersección."
-  });
+  if (discriminante > 0) {
+    steps.push({
+      stepId: `STEP_${stepCounter++}`,
+      description: "Bifurcación de Soluciones (Camino Positivo).",
+      currentState: `x₁ = (-(${bStr}) + ${sqrtDStr}) / ${twoAStr}`,
+      appliedProperty: "Separación del ±",
+      justification: "Calculamos la primera solución usando el signo de suma (+)."
+    });
+    steps.push({
+      stepId: `STEP_${stepCounter++}`,
+      description: "Resultado de x₁.",
+      currentState: `x₁ = ${x1Str}`,
+      appliedProperty: "Simplificación",
+      justification: "Se obtiene la primera coordenada del punto de corte."
+    });
 
-  steps.push({
-    stepId: `STEP_${stepCounter++}`,
-    description: "Desglose de raíces (x₁ y x₂).",
-    currentState: `x₁ = ${x1Str} | x₂ = ${x2Str}`,
-    appliedProperty: "Raíces del Polinomio",
-    justification: "Soluciones de la ecuación."
-  });
+    steps.push({
+      stepId: `STEP_${stepCounter++}`,
+      description: "Bifurcación de Soluciones (Camino Negativo).",
+      currentState: `x₂ = (-(${bStr}) - ${sqrtDStr}) / ${twoAStr}`,
+      appliedProperty: "Separación del ±",
+      justification: "Calculamos la segunda solución usando el signo de resta (-)."
+    });
+    steps.push({
+      stepId: `STEP_${stepCounter++}`,
+      description: "Resultado de x₂.",
+      currentState: `x₂ = ${x2Str}`,
+      appliedProperty: "Simplificación",
+      justification: "Se obtiene la segunda coordenada del punto de corte."
+    });
+  }
 
-  // Emulate setting the final calculated value
-  // We'll put both roots in the last state
   const finalState = discriminante === 0 ? `x = ${x1Str}` : `x₁ = ${x1Str}, x₂ = ${x2Str}`;
 
   steps.push({
     stepId: `STEP_${stepCounter++}`,
-    description: "Evaluación completada.",
+    description: "Conclusión de la Resolución.",
     currentState: finalState,
     appliedProperty: "Resultado Final",
-    justification: "Se han determinado los valores que satisfacen la ecuación cuadrática original."
+    justification: discriminante === 0 ? "La ecuación tiene un único punto de intersección." : "Se han encontrado ambas intersecciones donde la ecuación se equilibra."
   });
 
   return steps;
