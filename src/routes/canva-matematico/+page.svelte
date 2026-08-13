@@ -1,33 +1,50 @@
 <script lang="ts">
   import { calculadora } from '$lib/utils/calculator.svelte';
-  import { ghostMath, type AnalysisStep } from '$lib/utils/ghost-math-engine';
+  import { ghostMath, type AnalysisStep } from '$lib/utils/ghost-math';
 
   let analysisResults: AnalysisStep[] = $state([]);
   let hasAnalyzed = $state(false);
   let isAnalyzing = $state(false);
   let analysisStats = $state({ totalSteps: 0, timeMs: 0, complexity: 'Básico' });
 
+
+
   const buttons = [
-    ['sin', 'cos', 'tan', 'log'],
-    ['ln', '√', '(', ')'],
-    ['π', 'e', '^', 'AC'],
-    ['7', '8', '9', '÷'],
-    ['4', '5', '6', '×'],
-    ['1', '2', '3', '-'],
-    ['0', '.', '=', '+']
+    ['□/□', '√□', '<', '(', ')', '⌫', 'AC'],
+    ['x²', '|□|', '≤', '7', '8', '9', '÷'],
+    ['log_□', '□!', '>', '4', '5', '6', '×'],
+    ['i', '%', '≥', '1', '2', '3', '-'],
+    ['x', 'y', '=', '0', '.', 'SEND', '+']
   ];
 
+  const allExamples = [
+    "5 × 2 + 10",
+    "3 + 4 * 2 / 2^2",
+    "2x + 4 = 10",
+    "3(x - 2) = 9",
+    "x^2 - 4 = 0",
+    "4x^2 - 5x - 12 = 0",
+    "sin(30) + cos(60)",
+    "log(100) + ln(e)",
+    "sqrt(16) * 2^3",
+    "x/2 + 5 = 15"
+  ];
+  let examples = $state<string[]>([]);
+
+  function shuffleExamples() {
+    examples = [...allExamples].sort(() => 0.5 - Math.random()).slice(0, 3);
+  }
+  // Initialize
+  shuffleExamples();
+
   function btnClass(btn: string): string {
-    const base = 'rounded-lg px-2 py-3 text-sm font-semibold transition-all duration-150 active:scale-95 cursor-pointer select-none';
-    if (btn === 'AC') return `${base} bg-red-600 text-white hover:bg-red-500 shadow-md`;
-    if (btn === '=') return `${base} bg-emerald-600 text-white hover:bg-emerald-500 shadow-md`;
-    if (/^[0-9.]$/.test(btn)) return `${base} bg-gray-700 text-gray-100 hover:bg-gray-600`;
-    if (btn === 'sin' || btn === 'cos' || btn === 'tan' || btn === 'log' || btn === 'ln' || btn === '√' || btn === '^')
-      return `${base} bg-violet-700 text-violet-100 hover:bg-violet-600`;
-    if (btn === 'π' || btn === 'e') return `${base} bg-violet-700 text-violet-100 hover:bg-violet-600`;
-    if (btn === '+' || btn === '-' || btn === '×' || btn === '÷')
-      return `${base} bg-blue-700 text-blue-100 hover:bg-blue-600`;
-    return `${base} bg-gray-600 text-gray-200 hover:bg-gray-500`;
+    const base = "h-12 rounded-full flex items-center justify-center text-sm active:scale-95 transition-transform font-medium";
+    if (btn === 'SEND') return `${base} bg-[#cbb5ff] hover:bg-[#b89fff] text-black font-bold text-lg`;
+    if (btn === 'AC' || btn === '⌫') return `${base} bg-red-900/40 hover:bg-red-800/60 text-red-300 border border-red-800/30`;
+    if (/^[0-9.]$/.test(btn)) return `${base} bg-[#3a3a44] hover:bg-[#4a4a55] text-gray-100 text-lg`;
+    if (/^[xyabc]$/.test(btn) || ['□/□', '√□', 'x²', '|□|', 'log_□', '□!', 'i', '%', '(', ')'].includes(btn)) 
+        return `${base} bg-indigo-900/30 hover:bg-indigo-800/50 text-indigo-300 italic border border-indigo-800/30`;
+    return `${base} bg-[#303038] hover:bg-[#3e3e48] text-gray-300`;
   }
 
   function handleButton(value: string) {
@@ -36,12 +53,16 @@
       calculadora.clear();
     } else if (value === '⌫') {
       calculadora.backspace();
+    } else if (value === 'SEND') {
+      iniciarAnalisis();
     } else if (value === '=') {
-      calculadora.calculate();
-    } else if (value === '√') {
+      if (!calculadora.expression.includes('=')) calculadora.append(' = ');
+    } else if (value === 'x²') {
+      calculadora.append('^2');
+    } else if (value === '√□') {
       calculadora.append('sqrt(');
-    } else if (value === 'sin' || value === 'cos' || value === 'tan' || value === 'log' || value === 'ln') {
-      calculadora.append(value + '(');
+    } else if (value === '□/□') {
+      calculadora.append('/');
     } else {
       calculadora.append(value);
     }
@@ -58,7 +79,14 @@
     if (key === '^') handleButton('^');
     if (key === '(') handleButton('(');
     if (key === ')') handleButton(')');
-    if (key === 'Enter' || key === '=') handleButton('=');
+    if (key === '=' || /^[xyabc]$/i.test(key)) {
+      e.preventDefault();
+      handleButton(key.toLowerCase());
+    }
+    if (key === 'Enter') {
+      e.preventDefault();
+      handleButton('EXE');
+    }
     if (key === 'Backspace') handleButton('⌫');
     if (key === 'Escape') handleButton('AC');
   }
@@ -258,22 +286,22 @@
     <div class="grid gap-6 lg:grid-cols-2">
 
       <!-- LEFT PANEL: Calculator -->
-      <div class="rounded-2xl border border-gray-800 bg-gray-900/60 p-5 backdrop-blur-sm sm:p-6">
-        <h2 class="mb-4 flex items-center gap-2 text-lg font-bold text-gray-200">
-          <svg class="h-5 w-5 text-violet-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M4 7v10c0 2 1 3 3 3h10c2 0 3-1 3-3V7c0-2-1-3-3-3H7C5 4 4 5 4 7z" />
-            <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h8M12 8v8" />
-          </svg>
-          Calculadora Científica
+      <div class="rounded-2xl bg-[#1e1e24] text-gray-200 p-5 sm:p-6 shadow-2xl font-sans border border-gray-800">
+        <h2 class="mb-4 flex items-center gap-2 text-xl font-medium text-white">
+          Resolución de problemas matemáticos
         </h2>
 
-        <div class="mb-4 rounded-xl bg-gray-950 p-4 font-mono ring-1 ring-gray-800">
-          <div class="min-h-[1.75rem] break-all text-right text-lg text-gray-500">
-            {calculadora.expression || '0'}
-          </div>
-          <div class="mt-1 min-h-[2.25rem] break-all text-right text-3xl font-bold text-white transition-all duration-150">
-            {calculadora.result !== null ? calculadora.result : ''}
-          </div>
+        <div class="relative flex items-center mb-6">
+          <input 
+            type="text" 
+            bind:value={calculadora.expression}
+            oninput={(e) => calculadora.expression = (e.target as HTMLInputElement).value}
+            class="w-full bg-[#2a2a32] text-white text-xl p-4 pr-12 rounded-xl outline-none border border-transparent focus:border-gray-500 transition-all font-mono"
+            placeholder="Escribe o pega una expresión..."
+          />
+          <button class="absolute right-4 text-gray-400 hover:text-white" onclick={() => calculadora.clear()}>
+            ✕
+          </button>
         </div>
 
         {#if calculadora.error}
@@ -282,33 +310,60 @@
           </div>
         {/if}
 
-        <div class="grid grid-cols-4 gap-1.5">
+
+
+        <!-- Teclado (CSS Grid) -->
+        <div class="grid grid-cols-7 gap-2 mb-6">
           {#each buttons as row}
             {#each row as btn}
-              <button class={btnClass(btn)} onclick={() => handleButton(btn)}>
-                {btn}
-              </button>
+              {#if btn === 'SEND'}
+                <button 
+                  onclick={() => handleButton(btn)}
+                  disabled={isAnalyzing}
+                  class={btnClass(btn)}
+                >
+                  {#if isAnalyzing}
+                    <svg class="h-5 w-5 animate-spin text-black" fill="none" viewBox="0 0 24 24">
+                      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                    </svg>
+                  {:else}
+                    ➤
+                  {/if}
+                </button>
+              {:else}
+                <button 
+                  onclick={() => handleButton(btn)}
+                  class={btnClass(btn)}
+                >
+                  {btn}
+                </button>
+              {/if}
             {/each}
           {/each}
         </div>
 
-        <button
-          class="mt-5 w-full rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 px-6 py-3.5 font-bold text-white shadow-lg shadow-violet-900/30 transition-all duration-300 hover:from-indigo-500 hover:to-violet-500 hover:shadow-xl hover:shadow-violet-900/40 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
-          onclick={iniciarAnalisis}
-          disabled={isAnalyzing}
-        >
-          {#if isAnalyzing}
-            <span class="flex items-center justify-center gap-2">
-              <svg class="h-5 w-5 animate-spin" fill="none" viewBox="0 0 24 24">
-                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
-              </svg>
-              ANALIZANDO...
-            </span>
-          {:else}
-            ANALIZAR EXPRESIÓN
-          {/if}
-        </button>
+        <!-- Ejemplos -->
+        <div class="mt-4">
+          <div class="flex items-center gap-2 mb-3">
+            <h3 class="text-gray-400 text-sm m-0">Ejemplos aleatorios</h3>
+            <button onclick={shuffleExamples} class="text-gray-500 hover:text-white transition-colors" title="Cargar otros ejemplos">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+            </button>
+          </div>
+          <div class="flex gap-2 overflow-x-auto pb-2 scrollbar-hide" style="scrollbar-width: none; -ms-overflow-style: none;">
+            {#each examples as ex}
+              <button 
+                onclick={() => { calculadora.clear(); calculadora.append(ex); iniciarAnalisis(); }}
+                class="whitespace-nowrap bg-transparent border border-gray-600 hover:bg-gray-800 text-gray-200 px-5 py-2 rounded-full text-sm transition-colors"
+              >
+                {ex}
+              </button>
+            {/each}
+          </div>
+        </div>
+
+
       </div>
 
       <!-- RIGHT PANEL: Analysis -->

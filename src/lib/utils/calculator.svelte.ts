@@ -28,6 +28,13 @@ export class CalculadoraCientifica {
       this.result = null;
       return;
     }
+    // Si contiene 'x' o '=', es una ecuación o expresión algebraica.
+    // GHOST-MATH (el analizador) debe manejarlo, no el evaluador numérico simple.
+    if (this.expression.includes('x') || this.expression.includes('=')) {
+      this.result = null;
+      return;
+    }
+
     try {
       let expr = this.expression
         .replace(/×/g, '*')
