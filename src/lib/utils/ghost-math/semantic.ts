@@ -38,8 +38,8 @@ export function analyze(ast: MathNode): { semantic: SemanticAnalysis; report: De
   }
 
   const isEq = ast.type === 'Equation';
-  let method = isEq ? 'Despeje directo' : 'Evaluación aritmética';
-  let just = isEq ? 'La variable aparece aislada y puede resolverse mediante operaciones inversas básicas.' : 'Expresión puramente aritmética, se resolverá respetando la jerarquía de operaciones (PEMDAS).';
+  let method = isEq ? 'Resolución Lineal' : 'Evaluación aritmética';
+  let just = isEq ? 'Ecuación lineal o polinómica de primer grado. Se agruparán los términos para despejar la incógnita.' : 'Expresión puramente aritmética, se resolverá respetando la jerarquía de operaciones (PEMDAS).';
   let theme = isEq ? 'Ecuaciones lineales' : 'Cálculo Aritmético';
 
   if (isQuadratic) {

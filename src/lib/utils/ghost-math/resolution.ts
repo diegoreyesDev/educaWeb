@@ -4,8 +4,8 @@ export function solve(ast: MathNode, semantic: SemanticAnalysis, report: DeepAna
   if (report.recommendedMethod.name === 'Fórmula General') {
     return solveQuadraticFormula(ast);
   }
-  if (report.recommendedMethod.name === 'Despeje directo') {
-    return solveDirectIsolation(ast);
+  if (report.recommendedMethod.name === 'Resolución Lineal') {
+    return solveLinearEquation(ast);
   }
   if (report.recommendedMethod.name === 'Evaluación aritmética') {
     return evaluateArithmetic(ast);
@@ -55,27 +55,45 @@ function evaluateArithmetic(ast: MathNode): ResolutionStep[] {
       if (args.every(a => a.type === 'Number')) {
         const val = (args[0] as any).value;
         let res = 0;
-        switch(node.name) {
-          case 'sin': res = Math.sin(val * Math.PI / 180); break;
-          case 'cos': res = Math.cos(val * Math.PI / 180); break;
-          case 'tan': res = Math.tan(val * Math.PI / 180); break;
-          case 'sqrt': res = Math.sqrt(val); break;
-          case 'log': res = Math.log10(val); break;
-          case 'ln': res = Math.log(val); break;
+        let opDesc = "";
+        let prop = "";
+        let just = "";
+
+        const rad = val * (Math.PI / 180);
+
+        switch (node.name) {
+          case 'sin':
+            res = Math.sin(rad); opDesc = `Calcular el seno de ${val}°`;
+            prop = "Función Trigonométrica (Seno)"; just = "Calculamos la razón entre el cateto opuesto y la hipotenusa."; break;
+          case 'cos':
+            res = Math.cos(rad); opDesc = `Calcular el coseno de ${val}°`;
+            prop = "Función Trigonométrica (Coseno)"; just = "Calculamos la razón entre el cateto adyacente y la hipotenusa."; break;
+          case 'tan':
+            res = Math.tan(rad); opDesc = `Calcular la tangente de ${val}°`;
+            prop = "Función Trigonométrica (Tangente)"; just = "Calculamos la razón entre el cateto opuesto y el adyacente."; break;
+          case 'sqrt':
+            res = Math.sqrt(val); opDesc = `Calcular la raíz cuadrada de ${val}`;
+            prop = "Radicación"; just = "Encontramos el número que multiplicado por sí mismo nos da el radicando."; break;
+          case 'log':
+            res = Math.log10(val); opDesc = `Calcular logaritmo base 10 de ${val}`;
+            prop = "Logaritmo (Base 10)"; just = "Calculamos a qué exponente elevar el 10 para obtener el argumento."; break;
+          case 'ln':
+            res = Math.log(val); opDesc = `Calcular logaritmo natural de ${val}`;
+            prop = "Logaritmo Natural (Base e)"; just = "Calculamos a qué exponente elevar 'e' para obtener el argumento."; break;
         }
-        const stateBefore = formatNode(ast);
-        const nextNode = { type: 'Number', value: res } as MathNode;
+
+        const nextNode = { type: 'Number', value: Number(res.toFixed(6)) } as MathNode;
         replaceNodeInAst(node, nextNode);
         steps.push({
           stepId: `STEP_${stepCounter++}`,
-          description: `Evaluar función ${node.name}(${val})`,
+          description: opDesc,
           currentState: formatNode(ast),
-          appliedProperty: "Funciones Trigonométricas y Logarítmicas",
-          justification: "Se resuelve la función antes que otras operaciones."
+          appliedProperty: prop,
+          justification: just
         });
         return nextNode;
       }
-      return { ...node, args };
+      return { ...node, args } as MathNode;
     }
 
     // Binary operations
@@ -142,7 +160,10 @@ function evaluateArithmetic(ast: MathNode): ResolutionStep[] {
         });
         return nextNode;
       }
+      return { ...node, base: b, exp: e } as MathNode;
     }
+
+
 
     return node;
   }
@@ -201,9 +222,9 @@ function evaluateArithmetic(ast: MathNode): ResolutionStep[] {
 }
 
 // -----------------------------------------------------------------
-// SOLVER 2: DESPEJE DIRECTO (Ecuaciones algebraicas simples)
+// SOLVER 2: RESOLUCIÓN LINEAL (Evaluación Analítica General)
 // -----------------------------------------------------------------
-function solveDirectIsolation(ast: MathNode): ResolutionStep[] {
+function solveLinearEquation(ast: MathNode): ResolutionStep[] {
   const steps: ResolutionStep[] = [];
   let stepCounter = 1;
 
@@ -212,107 +233,78 @@ function solveDirectIsolation(ast: MathNode): ResolutionStep[] {
     description: "Análisis inicial de la ecuación lineal.",
     currentState: formatNode(ast),
     appliedProperty: "Planteamiento de Igualdad",
-    justification: "El objetivo de resolver una ecuación es despejar la incógnita (la letra). Imaginamos la ecuación como una balanza en equilibrio perfecto."
+    justification: "El objetivo es agrupar la incógnita y despejarla. Trataremos esta expresión como un equilibrio de fuerzas."
   });
 
   if (ast.type !== 'Equation') {
     throw new Error("El nodo raíz no es una ecuación.");
   }
 
-  let left = ast.left;
-  let right = ast.right;
+  // Use the same evaluation trick for robust linear solving
+  const f = (x: number) => evaluateAtPoly(ast.left, x) - evaluateAtPoly(ast.right, x);
+  const c = f(0);
+  const a = f(1) - c;
 
-  const MAX_ITERS = 10;
-  let iters = 0;
-
-  while (iters++ < MAX_ITERS) {
-    if (right.type !== 'Number') {
-      throw new Error("El motor actual requiere que el miembro derecho sea una constante.");
-    }
-    const rightVal = right.value;
-
-    if (left.type === 'Variable') {
+  if (Math.abs(a) < 1e-7) {
+    if (Math.abs(c) < 1e-7) {
       steps.push({
         stepId: `STEP_${stepCounter++}`,
-        description: "Despeje completado exitosamente.",
-        currentState: `${formatNode(left)} = ${formatNode(right)}`,
-        appliedProperty: "Aislamiento Total",
-        justification: "Al quedar la variable completamente sola en un lado, el valor del otro lado representa su solución final."
+        description: "Análisis de Identidad.",
+        currentState: "0 = 0",
+        appliedProperty: "Identidad Verdadera",
+        justification: "Cualquier número real es solución."
       });
-      break;
+    } else {
+      steps.push({
+        stepId: `STEP_${stepCounter++}`,
+        description: "Análisis de Contradicción.",
+        currentState: `${Number(c.toFixed(4))} = 0`,
+        appliedProperty: "Inconsistencia",
+        justification: "La ecuación no tiene solución real."
+      });
     }
-
-    if (left.type === 'Add') {
-      if (left.right.type === 'Number') {
-        const c = left.right.value;
-        left = left.left;
-        right = { type: 'Number', value: rightVal - c };
-        
-        steps.push({
-          stepId: `STEP_${stepCounter++}`,
-          description: `Restar ${c} en ambos lados.`,
-          currentState: `${formatNode(left)} = ${formatNode(right)}`,
-          appliedProperty: "Inverso Aditivo (Cancelar Suma)",
-          justification: "Para eliminar un número que suma, realizamos la operación contraria (resta) a ambos lados para no alterar la balanza."
-        });
-        continue;
-      }
-    }
-
-    if (left.type === 'Subtract') {
-      if (left.right.type === 'Number') {
-        const c = left.right.value;
-        left = left.left;
-        right = { type: 'Number', value: rightVal + c };
-        
-        steps.push({
-          stepId: `STEP_${stepCounter++}`,
-          description: `Sumar ${c} en ambos lados.`,
-          currentState: `${formatNode(left)} = ${formatNode(right)}`,
-          appliedProperty: "Inverso Aditivo (Cancelar Resta)",
-          justification: "Para eliminar un número negativo o resta, sumamos esa misma cantidad en ambos miembros para mantener el equilibrio."
-        });
-        continue;
-      }
-    }
-
-    if (left.type === 'Multiply') {
-      if (left.left.type === 'Number') {
-        const c = left.left.value;
-        left = left.right;
-        right = { type: 'Number', value: rightVal / c };
-        
-        steps.push({
-          stepId: `STEP_${stepCounter++}`,
-          description: `Dividir entre ${c} ambos lados.`,
-          currentState: `${formatNode(left)} = ${formatNode(right)}`,
-          appliedProperty: "Inverso Multiplicativo (Cancelar Multiplicación)",
-          justification: "Como el número multiplica a la incógnita, dividimos ambos lados entre dicho valor para dejar la variable con coeficiente 1."
-        });
-        continue;
-      }
-    }
-
-    if (left.type === 'Power') {
-      if (left.exp.type === 'Number') {
-        const c = left.exp.value;
-        left = left.base;
-        const rootVal = Math.pow(rightVal, 1.0 / c);
-        right = { type: 'Number', value: rootVal };
-        
-        steps.push({
-          stepId: `STEP_${stepCounter++}`,
-          description: `Aplicar raíz de índice ${c} en ambos lados.`,
-          currentState: `${formatNode(left)} = ${formatNode(right)}`,
-          appliedProperty: "Radicación (Cancelar Potencia)",
-          justification: "Para eliminar un exponente, aplicamos la raíz equivalente a ambos lados de la ecuación."
-        });
-        continue;
-      }
-    }
-
-    throw new Error(`Operaciones en el AST no soportadas para Despeje Directo en este prototipo (nodo actual: ${left.type}).`);
+    return steps;
   }
+
+  const aStr = Number.isInteger(a) ? a.toString() : a.toFixed(3);
+  const cStr = Number.isInteger(c) ? c.toString() : c.toFixed(3);
+
+  steps.push({
+    stepId: `STEP_${stepCounter++}`,
+    description: "Agrupación de términos (Forma Reducida).",
+    currentState: `${aStr}x ${c >= 0 ? '+' : ''}${cStr} = 0`,
+    appliedProperty: "Propiedad Distributiva y Términos Semejantes",
+    justification: "Trasladamos todas las variables y constantes a un solo lado para simplificar la estructura."
+  });
+
+  const constNegStr = Number.isInteger(-c) ? (-c).toString() : (-c).toFixed(3);
+
+  steps.push({
+    stepId: `STEP_${stepCounter++}`,
+    description: "Despeje de la Constante.",
+    currentState: `${aStr}x = ${constNegStr}`,
+    appliedProperty: "Inverso Aditivo (Balanza Matemática)",
+    justification: "Movemos la constante al lado derecho aplicando la operación opuesta (cambio de signo) para mantener el equilibrio."
+  });
+
+  const finalX = -c / a;
+  const finalXStr = Number.isInteger(finalX) ? finalX.toString() : finalX.toFixed(3);
+
+  steps.push({
+    stepId: `STEP_${stepCounter++}`,
+    description: "Despeje del Coeficiente de la Variable.",
+    currentState: `x = ${constNegStr} / ${aStr}`,
+    appliedProperty: "Inverso Multiplicativo",
+    justification: "Como el número está multiplicando a la variable, dividimos ambos lados de la ecuación entre ese número."
+  });
+
+  steps.push({
+    stepId: `STEP_${stepCounter++}`,
+    description: "Despeje completado exitosamente.",
+    currentState: `x = ${finalXStr}`,
+    appliedProperty: "Aislamiento Total",
+    justification: "Al quedar la variable completamente sola, el valor obtenido es nuestra solución única y final."
+  });
 
   return steps;
 }
