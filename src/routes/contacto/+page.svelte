@@ -80,7 +80,6 @@
       submitting = true;
 
       try {
-        // @ts-expect-error — módulo opcional, se usa solo si está instalado
         const emailjs = await import(/* @vite-ignore */ '@emailjs/browser');
         emailjs.default.init(PUBLIC_KEY!);
         await emailjs.default.send(SERVICE_ID!, TEMPLATE_ID!, {
@@ -124,27 +123,7 @@
   </section>
 
   <div class="container-page py-12">
-    {#if !emailjsConfigured}
-      <div class="mb-8 rounded-lg border border-amber-300 bg-amber-50 px-5 py-4">
-        <div class="flex items-start gap-3">
-          <svg xmlns="http://www.w3.org/2000/svg" class="mt-0.5 h-5 w-5 flex-shrink-0 text-amber-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
-            <line x1="12" y1="9" x2="12" y2="13" />
-            <line x1="12" y1="17" x2="12.01" y2="17" />
-          </svg>
-          <div class="text-sm text-amber-800">
-            <p class="font-semibold">EmailJS no está configurado</p>
-            <p class="mt-1">
-              El formulario usará tu cliente de correo para enviar el mensaje. Para habilitar el envío directo, configura las variables de entorno
-              <code class="rounded bg-amber-100 px-1 font-mono text-xs">VITE_EMAILJS_PUBLIC_KEY</code>,
-              <code class="rounded bg-amber-100 px-1 font-mono text-xs">VITE_EMAILJS_SERVICE_ID</code> y
-              <code class="rounded bg-amber-100 px-1 font-mono text-xs">VITE_EMAILJS_TEMPLATE_ID</code> e instala
-              <code class="rounded bg-amber-100 px-1 font-mono text-xs">@emailjs/browser</code>.
-            </p>
-          </div>
-        </div>
-      </div>
-    {/if}
+
 
     <div class="grid gap-8 md:grid-cols-[1fr_320px]">
       <div class="card">
